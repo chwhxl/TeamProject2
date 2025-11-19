@@ -15,8 +15,8 @@
 | 이름 | 역할 | GitHub |
 | :---: | :---: | :---: |
 | 문창욱 | (역할1) | @chwhxl |
-| 송주미 | (역할2) | @jumisong02 |
-| 윤승서 | (역할3) | @dbstmdtj |
+| 송주미 | 상품 데이터 수집 | @jumisong02 |
+| 윤승서 |  | @dbstmdtj |
 | 박준혁 | (역할4) | @junbak |
 
 <br>
@@ -27,3 +27,9 @@
 * **IDE**: `Eclipse`
 
 <br>
+
+## 11/19 meeting
+- 와인 판매 쇼핑몰로 결정
+- object type ArrayList로 상품 관리
+- 비회원/회원 구별, 사용자 정보(ID/PW)는 json -> Map으로 관리
+- 행사 상품이나 이벤트 항목 추가
