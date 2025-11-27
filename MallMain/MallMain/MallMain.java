@@ -3,6 +3,10 @@ package MallMain;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import proj2.DetailPanel;
+import proj2.Search;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -64,7 +68,11 @@ public class MallMain extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println(name + " 버튼이 눌렸습니다.");
                     if (name.equals("Wine")) {
-                        System.out.println("Wine shop is under construction.");
+                    	Search searchPanel = new Search(mainPanel);
+                        mainPanel.removeAll();
+                        mainPanel.add(searchPanel);
+                        mainPanel.revalidate();
+                        mainPanel.repaint();
                     }
                     if (name.equals("Beer")) {
                         System.out.println("Beer shop is under construction.");
