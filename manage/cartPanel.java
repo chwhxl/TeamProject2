@@ -14,8 +14,9 @@ public class cartPanel extends JPanel{
 	public void CartPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
 		setLayout(new BorderLayout());
-		
-		JLabel title = new JLabel("🛒 내 장바구니", SwingConstants.LEFT);
+
+		Image cartIcon = new ImageIcon("cartIcon");
+		JLabel title = new JLabel("🛒 내 장바구니", SwingConstants.LEFT, cartIcon);
 		title.setFont(new Font ("맑은 고딕", Font.BOLD, 20));
 		add(title, BorderLayout.NORTH);
 		
@@ -67,3 +68,4 @@ public class cartPanel extends JPanel{
 		cartArea.append("총 합계: "+ total + "원");
 	}
 }
+
