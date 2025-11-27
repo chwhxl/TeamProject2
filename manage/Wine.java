@@ -19,8 +19,9 @@ public class Wine {
     protected double alcohol; // 알코올 도수
     protected int year; // 생산 연도
     protected int stock; // 재고 수량
+    protected String imgPath // 이미지 경로
 
-    public Wine(String name, int price, WineType type, WineCountry country, String winery, String grape, double alcohol, int year) {
+    public Wine(String name, int price, WineType type, WineCountry country, String winery, String grape, double alcohol, int year, String imgPath) {
         this.name = name;
         this.price = price;
         this.type = type;
@@ -30,6 +31,8 @@ public class Wine {
         this.alcohol = alcohol;
         this.year = year;
         this.stock = 0;
+        this.imgPath = imgPath;
+        
     }
 
     public String getName() {
@@ -63,12 +66,14 @@ public class Wine {
     public int getYear() {
         return year;
     }
-
+    
+    public String imgPath() {
+        return imgPath;
+    }
+    
     @Override
     public String toString() {
         // 상품 상세 정보 출력
         return "";
     }
-
-
 }
