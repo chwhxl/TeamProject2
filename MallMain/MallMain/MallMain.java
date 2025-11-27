@@ -19,14 +19,14 @@ public class MallMain extends JFrame {
 
         // 타이틀 라벨
         JLabel titleLabel = new JLabel("Select shop", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setBorder(new EmptyBorder(30, 0, 30, 0)); // 위아래 여백
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         // 3행 1열의 격자 레이아웃
         buttonPanel.setLayout(new GridLayout(1, 3, 30, 0));
-        buttonPanel.setBorder(new EmptyBorder(200, 200, 300, 200)); // 좌우 여백을 줘서 버튼 크기 조절
+        buttonPanel.setBorder(new EmptyBorder(200, 200, 200, 200)); // 좌우 여백을 줘서 버튼 크기 조절
         buttonPanel.setBackground(Color.WHITE);
 
         String[] shopNames = {"Wine", "Beer", "Whiskey"};
@@ -50,10 +50,10 @@ public class MallMain extends JFrame {
             // 아이콘과 텍스트 위치, 간격 조절
             shopBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
             shopBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-            shopBtn.setIconTextGap(20);
+            shopBtn.setIconTextGap(40);
 
             // 버튼 스타일 꾸미기
-            shopBtn.setFont(new Font("Arial", Font.BOLD, 20)); // 글꼴 설정
+            shopBtn.setFont(new Font("Arial", Font.BOLD, 30)); // 글꼴 설정
             shopBtn.setBackground(new Color(240, 240, 240)); // 연한 회색 배경
             shopBtn.setFocusPainted(false); // 클릭 시 테두리 깜빡임 제거
             shopBtn.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
@@ -85,6 +85,7 @@ public class MallMain extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new MallMain());
+        MallMain frame = new MallMain();
+        frame.setVisible(true);
     }
 }
