@@ -1,0 +1,109 @@
+package User;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+import javax.swing.border.Border;
+
+public class history extends JPanel {
+	JFrame main = main_shop.main_shop;
+    public static ArrayList<product> historyitem = new ArrayList<>();
+    private JPanel panel;   // 스크롤 내부 panel
+
+    public history() {
+
+        setLayout(new BorderLayout());  // 패널의 기본 레이아웃
+
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 1));
+
+        // 아이템 리스트 표시
+        for (int i = 0; i < historyitem.size(); i++) {
+            final int index = i;
+
+            JPanel itemPanel = new JPanel();
+            itemPanel.setLayout(new BoxLayout(itemPanel, BoxLayout.X_AXIS));
+
+            Border border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY);
+
+            Dimension btnSize = new Dimension(100, 100);   // 전각 숫자 제거
+            Dimension lblSize = new Dimension(200, 100);
+
+            // 이미지 버튼
+            JButton btn = new JButton(new ImageIcon("C:\\Users\\Administrator\\Desktop\\박준혁_사인.png"));
+            btn.setBorderPainted(false);
+            btn.setFocusPainted(false);
+            btn.setContentAreaFilled(false);
+
+            JPanel btnPanel = new JPanel(new GridBagLayout());
+            btnPanel.setPreferredSize(btnSize);
+            btnPanel.setBorder(border);
+            btnPanel.add(btn);
+
+            btn.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    System.out.println("이미지 클릭: " + historyitem.get(index).name);
+                }
+            });
+
+            // 이름 버튼
+            JButton bttn = new JButton(historyitem.get(index).name);
+            bttn.setBorderPainted(false);
+            bttn.setContentAreaFilled(false);
+            bttn.setFocusPainted(false);
+
+            JPanel bttnPanel = new JPanel(new GridBagLayout());
+            bttnPanel.setPreferredSize(btnSize);
+            bttnPanel.setBorder(border);
+            bttnPanel.add(bttn);
+
+            bttn.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    System.out.println("이름 클릭: " + historyitem.get(index).name);
+                }
+            });
+
+            // 가격 라벨
+            JLabel lbl = new JLabel("가격: " + historyitem.get(index).getprice() + "원");
+            JPanel lblPanel = new JPanel(new GridBagLayout());
+            lblPanel.setPreferredSize(lblSize);
+            lblPanel.setBorder(border);
+            lblPanel.add(lbl);
+
+            // 하나의 itemPanel 구성
+            itemPanel.add(btnPanel);
+            itemPanel.add(bttnPanel);
+            itemPanel.add(lblPanel);
+
+            panel.add(itemPanel);
+        }
+
+        // 이전 버튼
+        JButton back = new JButton("이전");
+        panel.add(back);
+
+        back.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+				//메인에서 화면전환 함수 넣기
+            }
+        });
+
+        // 스크롤 포함
+        JScrollPane scroll = new JScrollPane(
+            panel,
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+
+        add(scroll, BorderLayout.CENTER);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(600, 700);
+    }
+}
