@@ -1,4 +1,4 @@
-package WineShop;
+package proj2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,6 @@ public class Search extends JPanel {
 
     private JButton topCate1, topCate2;
     private JButton totalButton;
-    private JButton home;
     private JPanel resultPanel;
 
     private JPanel mainPanel;
@@ -82,7 +81,7 @@ public class Search extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
-        totalButton.addActionListener(e -> showAllItem());
+        totalButton.addActionListener(e -> showAllWine());
 
         categoryPanel.add(topCate1);
         categoryPanel.add(topCate2);
@@ -115,11 +114,11 @@ public class Search extends JPanel {
         JPopupMenu prodMenu = new JPopupMenu();
         String[] prods = {"FR", "IT", "SP"};
 
-        for (String prodItem : prods) {
-            JMenuItem item = new JMenuItem(prodItem);
-            prodMenu.add(item);
+        for (String prodWine : prods) {
+            JMenuItem Wine = new JMenuItem(prodWine);
+            prodMenu.add(Wine);
 
-            item.addActionListener(e -> filterProd(prodItem));
+            Wine.addActionListener(e -> filterProd(prodWine));
         }
 
         topCate1.addMouseListener(new MouseAdapter() {
@@ -145,10 +144,10 @@ public class Search extends JPanel {
         String[] types = {"레드", "화이트", "스파클링"};
 
         for (String type : types) {
-            JMenuItem item = new JMenuItem(type);
-            typeMenu.add(item);
+            JMenuItem Wine = new JMenuItem(type);
+            typeMenu.add(Wine);
 
-            item.addActionListener(e -> filterType(type));
+            Wine.addActionListener(e -> filterType(type));
         }
 
         topCate2.addMouseListener(new MouseAdapter() {
@@ -179,19 +178,19 @@ public class Search extends JPanel {
     	
     }
     
-    private void showAllItem() {
+    private void showAllWine() {
 
         // 이전 검색 결과 삭제
         resultPanel.removeAll();
         // 전체 아이템 출력
-        for (Item item : ItemDB.itemList) {
+        for (Wine Wine : WineList.wineList) {
             // 카드 생성
-            SearchResult card = new SearchResult(item);
+            SearchResult card = new SearchResult(Wine);
             // 카드 클릭 → 디테일 페이지 이동
             card.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    moveToDetail(item);
+                    moveToDetail(Wine);
                 }
             });
             resultPanel.add(card);
@@ -204,31 +203,31 @@ public class Search extends JPanel {
     // 상품 검색
     private void searchName() {
         String key = itSearch.getText().trim().toLowerCase();  // 대소문자 구별 없음
-        updateResult(item -> item.getName().toLowerCase().contains(key));
+        updateResult(Wine -> Wine.getName().toLowerCase().contains(key));
     }
 
     // 생산지
-    private void filterProd(String itemProd) {
-        updateResult(item -> item.getOrigin().equals(itemProd));  // item class getter
+    private void filterProd(String WineProd) {
+        updateResult(Wine -> Wine.getCountry().equals(WineProd));  // Wine class getter
     }
 
     // 종류
     private void filterType(String type) {
-        updateResult(item -> item.getType().equals(type));  // item class getter
+        updateResult(Wine -> Wine.getType().equals(type));  // Wine class getter
     }
 
     // 검색 결과, 카테고리 선택 결과
-    private void updateResult(ItemFilter filter) {
+    private void updateResult(WineFilter filter) {
         resultPanel.removeAll();
 
-        for (Item item : ItemDB.itemList) {  // item/itemDB class
-            if (!filter.match(item)) continue;
+        for (Wine Wine : WineList.wineList) {  // Wine/WineDB class
+            if (!filter.match(Wine)) continue;
 
-            SearchResult card = new SearchResult(item);
+            SearchResult card = new SearchResult(Wine);
             card.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    moveToDetail(item);
+                    moveToDetail(Wine);
                 }
             });
 
@@ -240,15 +239,15 @@ public class Search extends JPanel {
     }
 
     // 상세 페이지
-    private void moveToDetail(Item item) {  // 임시 상세 페이지 이동
+    private void moveToDetail(Wine Wine) {  // 임시 상세 페이지 이동
         mainPanel.removeAll();
-        mainPanel.add(new DetailPanel(item));
+        mainPanel.add(new DetailPanel(Wine));
         mainPanel.revalidate();
         mainPanel.repaint();
     }
 
     // 인터페이스
-    private interface ItemFilter {
-        boolean match(Item item);
+    private interface WineFilter {
+        boolean match(Wine Wine);
     }
 }
