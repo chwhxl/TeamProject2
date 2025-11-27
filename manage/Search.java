@@ -70,7 +70,7 @@ public class Search extends JPanel {
             JMenuItem item = new JMenuItem(prodItem);
             prodMenu.add(item);
 
-            item.addActionListener(e -> filterByProd(prodItem));
+            item.addActionListener(e -> filterProd(prodItem));
         }
 
         topCate.addMouseListener(new MouseAdapter() {
@@ -99,7 +99,7 @@ public class Search extends JPanel {
             JMenuItem item = new JMenuItem(type);
             typeMenu.add(item);
 
-            item.addActionListener(e -> filterByType(type));
+            item.addActionListener(e -> filterType(type));
         }
 
         bottomCate.addMouseListener(new MouseAdapter() {
@@ -132,12 +132,12 @@ public class Search extends JPanel {
     }
 
     // 생산지
-    private void filterByProd(String itemProd) {
+    private void filterProd(String itemProd) {
         updateResult(item -> item.getOrigin().equals(itemProd));  // item class getter
     }
 
     // 종류
-    private void filterByType(String type) {
+    private void filterType(String type) {
         updateResult(item -> item.getType().equals(type));  // item class getter
     }
 
@@ -175,4 +175,5 @@ public class Search extends JPanel {
     private interface ItemFilter {
         boolean match(Item item);
     }
+
 }
