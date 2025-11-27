@@ -39,7 +39,7 @@ public class Search extends JPanel {
         });
 
         cateSearch = new JButton("검색");
-        cateSearch.addActionListener(e -> searchByName());
+        cateSearch.addActionListener(e -> searchName());
 
         topPanel.add(itSearch);
         topPanel.add(cateSearch);
@@ -126,7 +126,7 @@ public class Search extends JPanel {
     }
 
     // 상품 검색
-    private void searchByName() {
+    private void searchName() {
         String key = itSearch.getText().trim().toLowerCase();  // 대소문자 구별 없음
         updateResult(item -> item.getName().toLowerCase().contains(key));
     }
@@ -177,3 +177,4 @@ public class Search extends JPanel {
     }
 
 }
+
