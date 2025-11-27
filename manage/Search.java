@@ -7,9 +7,12 @@ import java.awt.event.*;
 public class Search extends JPanel {
 
     private JTextField itSearch;
-    private JButton cateSearch;
+    private JButton itButton;
+    private JButton homeButton;
 
-    private JButton topCate, bottomCate;
+    private JButton topCate1, topCate2;
+    private JButton totalButton;
+    private JButton home;
     private JPanel resultPanel;
 
     private JPanel mainPanel;
@@ -17,11 +20,31 @@ public class Search extends JPanel {
     public Search(JPanel mainPanel) {
         this.mainPanel = mainPanel;
         setLayout(new BorderLayout());
+        
+        // 홈 버튼
+        JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        homeButton = new JButton("홈");
+        homeButton.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {}
+
+            @Override
+            public void focusLost(FocusEvent e) {}
+        });
+
+        homeButton.addActionListener(e -> gotoMain());
+        homePanel.add(homeButton);
+
+        // 샵 로고
+        JLabel shopLogo = new JLabel("> 가나디 쇼핑몰 <", SwingConstants.CENTER);
+        
+        shopLogo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 
         // 검색
-        JPanel topPanel = new JPanel();
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-        itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
+        itSearch = new JTextField("검색어를 입력하세요.", 13);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {  // FocusListener 인터페이스
@@ -38,29 +61,55 @@ public class Search extends JPanel {
             }
         });
 
-        cateSearch = new JButton("검색");
-        cateSearch.addActionListener(e -> searchName());
+        itButton = new JButton("검색");
+        itButton.addActionListener(e -> searchName());
 
-        topPanel.add(itSearch);
-        topPanel.add(cateSearch);
+        searchPanel.add(itSearch);
+        searchPanel.add(itButton);
 
-        // 카테고리
+        // 카테고리+상품
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        topCate = new JButton("생산지");
-        bottomCate = new JButton("종류");
+        topCate1 = new JButton("생산지");
+        topCate2 = new JButton("종류");
+        totalButton = new JButton("모든 상품");
+        
+        totalButton.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {}
 
-        categoryPanel.add(topCate);
-        categoryPanel.add(bottomCate);
+            @Override
+            public void focusLost(FocusEvent e) {}
+        });
 
-        // 버튼 위치
-        JPanel northPanel = new JPanel();
-        northPanel.setLayout(new BorderLayout());
+        totalButton.addActionListener(e -> showAllItem());
 
-        northPanel.add(topPanel, BorderLayout.NORTH);
-        northPanel.add(categoryPanel, BorderLayout.SOUTH);
+        categoryPanel.add(topCate1);
+        categoryPanel.add(topCate2);
+        categoryPanel.add(totalButton);
 
-        add(northPanel, BorderLayout.NORTH);
+        // 버튼 위치 2행 1열
+        JPanel bigTopPanel = new JPanel(new GridLayout(2, 1));
+
+        // 1행
+        JPanel btLocation1 = new JPanel(new BorderLayout());
+
+        btLocation1.add(homePanel, BorderLayout.WEST);
+        btLocation1.add(shopLogo, BorderLayout.CENTER);
+        btLocation1.add(new JPanel(), BorderLayout.EAST);
+        
+        bigTopPanel.add(btLocation1);
+
+        // 2행
+        JPanel btLocation2 = new JPanel(new BorderLayout());
+
+        btLocation2.add(categoryPanel, BorderLayout.WEST);
+        searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        btLocation2.add(searchPanel, BorderLayout.EAST);
+
+        bigTopPanel.add(btLocation2);
+
+        add(bigTopPanel, BorderLayout.NORTH);
 
         // 카테고리 하위 버튼
         JPopupMenu prodMenu = new JPopupMenu();
@@ -73,10 +122,10 @@ public class Search extends JPanel {
             item.addActionListener(e -> filterProd(prodItem));
         }
 
-        topCate.addMouseListener(new MouseAdapter() {
+        topCate1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                prodMenu.show(topCate, 0, topCate.getHeight());
+                prodMenu.show(topCate1, 0, topCate1.getHeight());
             }
 
             @Override
@@ -102,10 +151,10 @@ public class Search extends JPanel {
             item.addActionListener(e -> filterType(type));
         }
 
-        bottomCate.addMouseListener(new MouseAdapter() {
+        topCate2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                typeMenu.show(bottomCate, 0, bottomCate.getHeight());
+                typeMenu.show(topCate2, 0, topCate2.getHeight());
             }
 
             @Override
@@ -123,6 +172,33 @@ public class Search extends JPanel {
         // 결과
         resultPanel = new JPanel(new FlowLayout());
         add(new JScrollPane(resultPanel), BorderLayout.CENTER);
+    }
+    
+    // 메인으로 돌아가기
+    private void gotoMain() {
+    	
+    }
+    
+    private void showAllItem() {
+
+        // 이전 검색 결과 삭제
+        resultPanel.removeAll();
+        // 전체 아이템 출력
+        for (Item item : ItemDB.itemList) {
+            // 카드 생성
+            SearchResult card = new SearchResult(item);
+            // 카드 클릭 → 디테일 페이지 이동
+            card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    moveToDetail(item);
+                }
+            });
+            resultPanel.add(card);
+        }
+        // 화면 갱신
+        resultPanel.revalidate();
+        resultPanel.repaint();
     }
 
     // 상품 검색
@@ -175,6 +251,4 @@ public class Search extends JPanel {
     private interface ItemFilter {
         boolean match(Item item);
     }
-
 }
-
