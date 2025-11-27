@@ -7,8 +7,7 @@ import java.util.*;
 import javax.swing.border.Border;
 
 public class history extends JPanel {
-	JFrame main = main_shop.main_shop;
-    public static ArrayList<product> historyitem = new ArrayList<>();
+    public static ArrayList<Wine> historyitem = new ArrayList<>();
     private JPanel panel;   // 스크롤 내부 panel
 
     public history() {
@@ -32,7 +31,7 @@ public class history extends JPanel {
 
             // 이미지 버튼
             JButton btn = new JButton(new ImageIcon("C:\\Users\\Administrator\\Desktop\\박준혁_사인.png"));
-            btn.setBorderPainted(false);
+            btn.setBorderPainted(false); //버튼 모양 숨기기
             btn.setFocusPainted(false);
             btn.setContentAreaFilled(false);
 
@@ -44,12 +43,12 @@ public class history extends JPanel {
             btn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("이미지 클릭: " + historyitem.get(index).name);
+                    System.out.println("이미지 클릭: " + historyitem.get(index).getName());
                 }
             });
 
             // 이름 버튼
-            JButton bttn = new JButton(historyitem.get(index).name);
+            JButton bttn = new JButton(historyitem.get(index).getName());
             bttn.setBorderPainted(false);
             bttn.setContentAreaFilled(false);
             bttn.setFocusPainted(false);
@@ -62,12 +61,12 @@ public class history extends JPanel {
             bttn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("이름 클릭: " + historyitem.get(index).name);
+                    System.out.println("이름 클릭: " + historyitem.get(index).getName());
                 }
             });
 
             // 가격 라벨
-            JLabel lbl = new JLabel("가격: " + historyitem.get(index).getprice() + "원");
+            JLabel lbl = new JLabel("가격: " + historyitem.get(index).getPrice() + "원");
             JPanel lblPanel = new JPanel(new GridBagLayout());
             lblPanel.setPreferredSize(lblSize);
             lblPanel.setBorder(border);

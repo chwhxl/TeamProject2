@@ -1,36 +1,41 @@
 package User;
 
+import java.util.ArrayList;
 
 public class cart {
 
-		public static product[] list = {
-			 	new product_1("Rodeo",10,80000), 
-				new product_1("ASTROWORLD",5,100000),
-				new product_1("UTOPIA",8,80000),
-				new product_1("Rodeo1",10,80000), 
-				new product_1("ASTROWORLD1",5,100000),
-				new product_1("UTOPIA1",8,80000),
-				new product_1("Rodeo2",10,80000), 
-				new product_1("ASTROWORLD2",5,100000),
-				new product_1("UTOPIA2",8,80000),
-				new product_1("Rode1o",10,80000), 
-				new product_1("ASTRO1WORLD",5,100000),
-				new product_1("UTOPI1A",8,80000),
-				new product_1("Rodeo11",10,80000), 
-				new product_1("ASTROW2ORLD1",5,100000),
-				new product_1("UTOPI2A1",8,80000),
-				new product_1("Rodeo22",10,80000), 
-				new product_1("ASTRO2WORLD2",5,100000),
-				new product_1("UTOPI2A2",8,80000),
-				new product_1("Rode3o",10,80000), 
-				new product_1("ASTR3OWORLD",5,100000),
-				new product_1("UTOP3IA",8,80000),
-				new product_1("Rod3eo1",10,80000), 
-				new product_1("ASTRO3WORLD1",5,100000),
-				new product_1("UTOP3IA1",8,80000),
-				new product_1("Rodeo32",10,80000), 
-				new product_1("ASTRO3WORLD2",5,100000),
-				new product_1("UTOPI3A2",8,80000)};
-
+	private static final int ITEM_MAX = 20;
+	public static ArrayList<Wine> itemsInCart = new ArrayList<>(ITEM_MAX);
+	private static int itemCount = 0;
+	private static int totalPrice =0;
 	
+	
+//	public void Cart() {
+//		this.itemsInCart = new ArrayList<>(20);
+//	} 
+	
+	static void addtoCart(Wine item) {
+		if (itemCount < ITEM_MAX ) {
+			itemsInCart.add(itemCount, item);
+			itemCount++;
+			totalPrice += item.getPrice();
+		}else {
+			System.out.println("장바구니가 가득 찼습니다😅");
+		}
+	}
+	
+	static void showCart() {
+		if (itemCount==0) {
+			System.out.println("😥 장바구니가 비어있습니다 ");
+		}else {
+			System.out.println("🛒 장바구니 목록 ");
+			for (int i=0; i< itemCount ; i++) {
+				Wine item = itemsInCart.get(i);
+				System.out.println((i + 1) + ". " + item.getName() + " | " + item.getPrice() + "원");
+			}
+			System.out.println("Total: " + totalPrice + " 원" );
+		}
+		
+		 
+	}
 }

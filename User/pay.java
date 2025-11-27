@@ -17,15 +17,15 @@ public class pay extends JPanel {
 
     private JPanel panel;                 // 메인 내부 패널 (static 제거)
     public static ArrayList<Integer> check = new ArrayList<>();
-    public static ArrayList<product> cartitem = new ArrayList<>();
+    public static ArrayList<Wine> cartitem = new ArrayList<>();
 
     public pay() {
 
         // 한 번 들어올 때마다 cartitem 채우기 (중복 방지하려면 clear() 먼저)
         cartitem.clear();
-        for (int i = 0; i < cart.list.length; i++) {
-            cartitem.add(cart.list[i]);
-        }
+       // for (int i = 0; i < cart.list.length; i++) {
+         //   cartitem.add(cart.list[i]);
+        //}
 
         // 이 pay 자체 레이아웃
         setLayout(new BorderLayout());
@@ -85,13 +85,13 @@ public class pay extends JPanel {
             btn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("사진 버튼 클릭됨: " + cartitem.get(index).name);
+                    System.out.println("사진 버튼 클릭됨: " + cartitem.get(index).getName());
                     // 상세 페이지 열기
                 }
             });
 
             // ---- BUTTON PANEL 2 (이름) ----
-            JButton bttn = new JButton(cartitem.get(index).name);
+            JButton bttn = new JButton(cartitem.get(index).getName());
             bttn.setFont(bttn.getFont().deriveFont(11f));
             bttn.setBorderPainted(false);
             bttn.setFocusPainted(false);
@@ -106,15 +106,15 @@ public class pay extends JPanel {
             bttn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("이름 버튼 클릭됨: " + cartitem.get(index).name);
+                    System.out.println("이름 버튼 클릭됨: " + cartitem.get(index).getName());
                     // 상세 페이지 열기
                 }
             });
 
             // ---- PRICE LABEL PANEL ----
             JLabel lbl = new JLabel(
-                "가격: " + cartitem.get(index).getprice() +
-                "원, 갯수 : " + cartitem.get(index).getnum() + "개 "
+                "가격: " + cartitem.get(index).getPrice() +
+                "원, 갯수 : " + cartitem.get(index).getStock() + "개 "
             );
             JPanel lblPanel = new JPanel(new GridBagLayout());
             lblPanel.setPreferredSize(lblSize);
@@ -140,7 +140,7 @@ public class pay extends JPanel {
                     payment.payments(check.get(i));
                 }
                 for (int i = cartitem.size() - 1; i >= 0; i--) {
-                    if (cartitem.get(i).getnum() == 0) {
+                    if (cartitem.get(i).getStock() == 0) {
                         cartitem.remove(i);
                     }
                 }
@@ -157,6 +157,7 @@ public class pay extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
             	//메인에서 화면전환 함수 넣기
+            	//main_shop.setContenpanel(main_shop.hisPanel);
             }
         });
 
