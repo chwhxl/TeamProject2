@@ -1,14 +1,18 @@
 package proj2;
 
 import javax.swing.*;
+
+import MallMain.MallMain;
+
 import java.awt.*;
 import java.awt.event.*;
 
-public class Search extends JPanel {
+public class WineShop extends JPanel {
 
     private JTextField itSearch;
     private JButton itButton;
     private JButton homeButton;
+    private JButton cartButton;
 
     private JButton topCate1, topCate2;
     private JButton totalButton;
@@ -16,7 +20,7 @@ public class Search extends JPanel {
 
     private JPanel mainPanel;
 
-    public Search(JPanel mainPanel) {
+    public WineShop(JPanel mainPanel) {
         this.mainPanel = mainPanel;
         setLayout(new BorderLayout());
         
@@ -34,6 +38,21 @@ public class Search extends JPanel {
 
         homeButton.addActionListener(e -> gotoMain());
         homePanel.add(homeButton);
+        
+        // 장바구니 버튼
+        JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        
+        cartButton = new JButton("장바구니");
+        cartButton.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {}
+
+            @Override
+            public void focusLost(FocusEvent e) {}
+        });
+
+        cartButton.addActionListener(e -> gotoCart());
+        cartPanel.add(cartButton);
 
         // 샵 로고
         JLabel shopLogo = new JLabel("> 가나디 쇼핑몰 <", SwingConstants.CENTER);
@@ -88,25 +107,31 @@ public class Search extends JPanel {
         categoryPanel.add(totalButton);
 
         // 버튼 위치 2행 1열
-        JPanel bigTopPanel = new JPanel(new GridLayout(2, 1));
+        JPanel bigTopPanel = new JPanel(new GridLayout(3, 1));
 
         // 1행
         JPanel btLocation1 = new JPanel(new BorderLayout());
 
-        btLocation1.add(homePanel, BorderLayout.WEST);
         btLocation1.add(shopLogo, BorderLayout.CENTER);
-        btLocation1.add(new JPanel(), BorderLayout.EAST);
         
         bigTopPanel.add(btLocation1);
-
+        
         // 2행
         JPanel btLocation2 = new JPanel(new BorderLayout());
-
-        btLocation2.add(categoryPanel, BorderLayout.WEST);
-        searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        btLocation2.add(searchPanel, BorderLayout.EAST);
-
+        
+        btLocation2.add(homePanel, BorderLayout.WEST);
+        btLocation2.add(cartPanel, BorderLayout.EAST);
+        
         bigTopPanel.add(btLocation2);
+
+        // 3행
+        JPanel btLocation3 = new JPanel(new BorderLayout());
+
+        btLocation3.add(categoryPanel, BorderLayout.WEST);
+        searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        btLocation3.add(searchPanel, BorderLayout.EAST);
+
+        bigTopPanel.add(btLocation3);
 
         add(bigTopPanel, BorderLayout.NORTH);
 
@@ -175,17 +200,29 @@ public class Search extends JPanel {
     
     // 메인으로 돌아가기
     private void gotoMain() {
-    	
+    	// MallMain mallPanel = new MallMain(mainPanel);
+        // mainPanel.removeAll();
+        // mainPanel.add(mallPanel);
+        // mainPanel.revalidate();
+        // mainPanel.repaint();
+    }
+    
+    // 장바구니 가기
+    private void gotoCart() {
+    	// Cart cartPanel = new MallMain();
+    	// Panel.removeAll();                        
+    	// Panel.add(cartPanel);
+    	// Panel.revalidate();
+    	// Panel.repaint();
     }
     
     private void showAllWine() {
-
         // 이전 검색 결과 삭제
         resultPanel.removeAll();
         // 전체 아이템 출력
         for (Wine Wine : WineList.wineList) {
             // 카드 생성
-            SearchResult card = new SearchResult(Wine);
+            WineSearchResult card = new WineSearchResult(Wine);
             // 카드 클릭 → 디테일 페이지 이동
             card.addMouseListener(new MouseAdapter() {
                 @Override
@@ -220,10 +257,10 @@ public class Search extends JPanel {
     private void updateResult(WineFilter filter) {
         resultPanel.removeAll();
 
-        for (Wine Wine : WineList.wineList) {  // Wine/WineDB class
+        for (Wine Wine : WineList.wineList) {  // Wine/WineList class
             if (!filter.match(Wine)) continue;
 
-            SearchResult card = new SearchResult(Wine);
+            WineSearchResult card = new WineSearchResult(Wine);
             card.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
