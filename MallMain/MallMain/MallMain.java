@@ -83,7 +83,7 @@ public class MallMain extends JFrame {
 
                     	JPanel PayPanel = new pay();
                         Panel.removeAll();          //패널 갈아끼는 로직               
-                        Panel.add(searchPanel;
+                        Panel.add(searchPanel);
                         Panel.revalidate();
                         Panel.repaint();
                     }
