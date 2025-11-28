@@ -6,14 +6,14 @@ import java.nio.charset.StandardCharsets;
 
 public class WineList {
 
-    private ArrayList<Wine> wineList = new ArrayList<>();
+    private static ArrayList<Wine> wineList = new ArrayList<>();
     private String filePath = "data/wine/wine.csv";
-
+    
     public WineList() {
         readWineCSV(filePath, wineList);
     }
 
-    public ArrayList<Wine> getWineList() {
+    public static ArrayList<Wine> getWineList() {
         return wineList;
     }
 
