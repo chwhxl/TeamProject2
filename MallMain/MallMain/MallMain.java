@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 //import WineShop.DetailPanel;
 import WineShop.Search;
 import WineShop.WineList;
-import manage.*;
+//import manage.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -82,20 +82,14 @@ public class MallMain extends JFrame {
                     	Search searchPanel = new Search(Panel);
 
                     	JPanel PayPanel = new pay();
-                        Panel.removeAll();                        
-                        Panel.add(searchPanel,BorderLayout.NORTH);
-                        Panel.add(PayPanel,BorderLayout.CENTER);
+                        Panel.removeAll();          //패널 갈아끼는 로직               
+                        Panel.add(searchPanel;
                         Panel.revalidate();
                         Panel.repaint();
                     }
                     if (name.equals("Beer")) {
                         System.out.println("Beer shop is under construction.");
 
-                    	JPanel PayPanel = new pay();
-                        Panel.removeAll();
-                        Panel.add(PayPanel);
-                        Panel.revalidate();
-                        Panel.repaint();
                     }
                     if (name.equals("Whiskey")) {
                         System.out.println("Whiskey shop is under construction.");
