@@ -32,12 +32,12 @@ class ShopPanel extends JPanel {
         add(contentPanel, BorderLayout.CENTER);
 
         // 하단: 뒤로가기 버튼
-        JButton btnBack = new JButton("🏠 메인으로 돌아가기");
+        JButton btnBack = new JButton("홈으로 돌아가기");
         btnBack.setFont(new Font("맑은 고딕", Font.BOLD, 16));
         btnBack.setPreferredSize(new Dimension(100, 50));
         
         // 클릭하면 다시 HOME 화면을 보여달라고 요청
-        btnBack.addActionListener(e -> mainFrame.showCard("HOME"));
+        btnBack.addActionListener(e -> mainFrame.showMainCard("HOME"));
         
         add(btnBack, BorderLayout.SOUTH);
     }

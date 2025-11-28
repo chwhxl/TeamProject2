@@ -59,11 +59,11 @@ public class HomePanel extends JPanel{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (name.equals("Wine")) {
-						mainFrame.showCard("WINE");
+						mainFrame.showMainCard("WINE");
 					} else if (name.equals("Beer")) {
-						mainFrame.showCard("BEER");
+						mainFrame.showMainCard("BEER");
 					} else if (name.equals("Whiskey")) {
-						mainFrame.showCard("WHISKEY");
+						mainFrame.showMainCard("WHISKEY");
 					}
 				}
 			});
