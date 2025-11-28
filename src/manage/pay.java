@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import javax.swing.Timer;
+
 import javax.swing.border.Border;
 import wineshop.*;
 import wineshop.Wine;
@@ -25,7 +27,7 @@ public class pay extends JPanel {
 
     public pay() {
     	
-    	cartitem = WineList.wineList;
+    	cartitem = WineList.getWineList();
         // 이 pay 자체 레이아웃
         setLayout(new BorderLayout());
 
@@ -150,14 +152,14 @@ public class pay extends JPanel {
                 	inputPanel.add(phoneLabel);
                 	inputPanel.add(phoneField);
 
-                	int result = JOptionPane.showConfirmDialog(
+                	int result1 = JOptionPane.showConfirmDialog(
                 	        pay.this, 
                 	        inputPanel, 
                 	        "결제 정보 입력", 
                 	        JOptionPane.OK_CANCEL_OPTION
                 	);
 
-                	if (result == JOptionPane.OK_OPTION) {
+                	if (result1 == JOptionPane.OK_OPTION) {
                 	    String userName = nameField.getText();
                 	    String userPhone = phoneField.getText();
 
@@ -189,8 +191,6 @@ public class pay extends JPanel {
                 	        public void actionPerformed(ActionEvent e) {
                 	            loadingDialog.dispose(); // 로딩 창 닫기
                 	            
-                	            // 3. 결제 로직 처리 (로딩이 끝난 후 실행)
-                	            processPayment(); 
                 	        }
                 	    });
                 	    
