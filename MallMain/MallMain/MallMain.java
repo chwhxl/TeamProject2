@@ -4,22 +4,33 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import proj2.DetailPanel;
-import proj2.Search;
-
+//import WineShop.DetailPanel;
+import WineShop.Search;
+import WineShop.WineList;
+import manage.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MallMain extends JFrame {
+	public static JPanel Panel = new JPanel();
+	public static JPanel mainPanel = new JPanel();
     public MallMain() {
+    	
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫기 시 프로그램 종료
         setTitle("Mall Main"); // 창 제목 설정
         setSize(1600, 900); // MainFrame 크기 1600 x 900 고정
-
+        new WineList();
+        
+        Panel.setLayout(new BorderLayout()); //추가
+        Panel.setBackground(Color.WHITE);
+        Panel.add(mainPanel);
+        add(Panel);
         // 메인 패널 설정
-        JPanel mainPanel = new JPanel();
+        //JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
+        
 
         // 타이틀 라벨
         JLabel titleLabel = new JLabel("Select shop", SwingConstants.CENTER);
@@ -68,14 +79,23 @@ public class MallMain extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println(name + " 버튼이 눌렸습니다.");
                     if (name.equals("Wine")) {
-                    	Search searchPanel = new Search(mainPanel);
-                        mainPanel.removeAll();
-                        mainPanel.add(searchPanel);
-                        mainPanel.revalidate();
-                        mainPanel.repaint();
+                    	Search searchPanel = new Search(Panel);
+
+                    	JPanel PayPanel = new pay();
+                        Panel.removeAll();                        
+                        Panel.add(searchPanel,BorderLayout.NORTH);
+                        Panel.add(PayPanel,BorderLayout.CENTER);
+                        Panel.revalidate();
+                        Panel.repaint();
                     }
                     if (name.equals("Beer")) {
                         System.out.println("Beer shop is under construction.");
+
+                    	JPanel PayPanel = new pay();
+                        Panel.removeAll();
+                        Panel.add(PayPanel);
+                        Panel.revalidate();
+                        Panel.repaint();
                     }
                     if (name.equals("Whiskey")) {
                         System.out.println("Whiskey shop is under construction.");
@@ -88,7 +108,6 @@ public class MallMain extends JFrame {
 
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        add(mainPanel);
         setVisible(true);
     }
 
