@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.*;
 import javax.swing.border.Border;
 
-import MallMain.MallMain;
+import mallmain.mallmain;
 import wineshop.Wine;
 
 public class history extends JPanel {
