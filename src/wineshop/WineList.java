@@ -18,7 +18,7 @@ public class WineList {
 	}
 
     // 와인 데이터 로드
-    public static void loadWineData(String filePath) {
+    public static void loadWineData() {
         if (!wineList.isEmpty()) {
             System.out.println("와인 데이터가 이미 존재합니다.");
             return;
