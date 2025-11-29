@@ -72,10 +72,10 @@ public class pay extends JPanel {
         payButton.addActionListener(e -> handlePay());
 
         // 구매내역 화면 전환 (카드 이름은 Main 쪽 설계에 맞춰서 사용)
-        historyButton.addActionListener(e -> mainFrame.showCard("HISTORY"));
+        historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
 
         // 홈 화면 전환
-        homeButton.addActionListener(e -> mainFrame.showCard("HOME"));
+        homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
 
         bottomPanel.add(totalLabel);
         bottomPanel.add(historyButton);
@@ -211,7 +211,7 @@ public class pay extends JPanel {
         for (int j = check.size() - 1; j >= 0; j--) {
             int idx = check.get(j);          // 실제 와인 인덱스
 
-            tp += payment.payments(idx);     // 결제 (결제 금액 반환한다고 가정)
+            //tp += payments(idx);     // 결제 (결제 금액 반환한다고 가정)
 
             if (wineList.get(idx).getStock() == 0) {
                 wineList.remove(idx);        // 재고 0이면 목록에서 제거

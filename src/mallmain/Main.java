@@ -13,7 +13,8 @@ public class Main extends JFrame {
     private WineShopPanel winePanel;
     private WineShopPanel beerPanel;
     private WineShopPanel whiskeyPanel;
-    
+    private JPanel PayPanel;
+    private JPanel HisPanel;
     public Main() {
     	// JFrame 기본 설정
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫기 시 프로그램 종료
@@ -24,19 +25,21 @@ public class Main extends JFrame {
         // CardLayout 설정
         mainLayout = new CardLayout();
         mainContainer = new JPanel(mainLayout);
-
+        
         // 1. 패널들을 미리 생성 -> 생성자에 'this'를 넘기는 이유는 패널들이 메인 프레임에게 화면 전환 요청하기 위함
         homePanel = new HomePanel(this);
         winePanel = new WineShopPanel(this);
         beerPanel = new WineShopPanel(this);
         whiskeyPanel = new WineShopPanel(this);
-
+        PayPanel = new manage.pay(this);
+        HisPanel = new manage.History(this);
         // 2. CardLayout에 패널들 등록 (이름표를 붙여줌)
         mainContainer.add(homePanel, "HOME");
         mainContainer.add(winePanel, "WINE");
         mainContainer.add(beerPanel, "BEER");
         mainContainer.add(whiskeyPanel, "WHISKEY");
-
+        mainContainer.add(PayPanel,"PAY");
+        mainContainer.add(HisPanel,"HISTORY");
         add(mainContainer);
         setVisible(true);
     }
