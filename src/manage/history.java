@@ -5,15 +5,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 import javax.swing.border.Border;
-
-import mallmain.mallmain;
+import mallmain.*;
 import wineshop.Wine;
 
 public class history extends JPanel {
     public static ArrayList<Wine> historyitem = new ArrayList<>();
-    public static JPanel hispanel = MallMain.hisPanel;   // 스크롤 내부 panel
+    public static JPanel hispanel = new JPanel();  // 스크롤 내부 panel
 
-    public history() {
+    public history(Main mainFrame) {
 
         setLayout(new BorderLayout());  // 패널의 기본 레이아웃
 
@@ -86,18 +85,13 @@ public class history extends JPanel {
         // 이전 버튼
         JButton back = new JButton("이전");
         hispanel.add(back);
-
-        back.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-				//메인에서 화면전환 함수 넣기
-            	MallMain.Panel.removeAll();
-                MallMain.Panel.add(MallMain.PayPanel);	 //작동 안함
-                MallMain.Panel.revalidate();
-                MallMain.Panel.repaint();
-            }
-        });
-
+        
+        back.addActionListener(e -> mainFrame.showCard("PAY"));
+        // 이전 버튼
+        JButton home = new JButton("홈으로");
+        hispanel.add(home);
+        
+        home.addActionListener(e -> mainFrame.showCard("HOME"));
         // 스크롤 포함
         JScrollPane scroll = new JScrollPane(
             hispanel,

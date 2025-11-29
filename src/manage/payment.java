@@ -1,29 +1,71 @@
 package manage;
 
 import java.util.ArrayList;
+import wineshop.*;
 
-import wineshop.Wine;
-//swing 사용
 public class payment {
-	static ArrayList<Wine> histori = new ArrayList<>(); //구매내역 레퍼런스
-	
-	public static int payments(int j) {
-		int k=0;
-	    //체크박스 눌러서 체크 된 오브젝트들만 결제되도록.
-	    
-	    k += pay.cartitem.get(j).getPrice() * pay.cartitem.get(j).getStock(); //가격 계산
-	    System.out.println(k + "원 결제.");
-	    int u = 0;
-	    // 유저.돈 - k; 
-	    for(int i=0;i<history.historyitem.size();i++) {
-	    	if(history.historyitem.get(i).getName().equalsIgnoreCase(pay.cartitem.get(j).getName())){ //hisroti배열에 같은 값이 있다면
-	    		history.historyitem.get(j).AddtoCart(pay.cartitem.get(j).getStock()); //그 아이템을 카트에 있는 갯수만큼 증가시키는 함수 필요
-	    		u++; 
-	    	//}
-	    	}
-	    }
-	    if(u==0) {history.historyitem.add(pay.cartitem.get(j));}//카트에 없으면 새로 넣기 (아이템 배열 추가 필요)
-	    pay.cartitem.get(j).RemovefromCart(pay.cartitem.get(j).getStock());//카트에서 물건 빼기
-	    return k;
-	}	
+
+    /** 
+     * j : winelist 에서 선택된 와인의 인덱스
+     * return : 결제 금액
+     */
+    public static int payments(int j) {
+
+        var winelist = WineList.getWineList();
+        if (winelist == null || j < 0 || j >= winelist.size()) {
+            System.err.println("payments: 잘못된 인덱스 " + j);
+            return 0;
+        }
+
+        Wine original = winelist.get(j);
+
+        int buyQty = original.getStock();              // 현재 설계에서는 “전체 재고 구매”
+        int amount = original.getPrice() * buyQty;
+
+        // -------------------------------
+        // 1) HISTORY에 같은 이름 있는지 확인
+        // -------------------------------
+        boolean found = false;
+
+        for (int i = 0; i < history.historyitem.size(); i++) {
+            Wine hw = history.historyitem.get(i);
+
+            if (hw.getName().equalsIgnoreCase(original.getName())) {
+                hw.increaseStock(buyQty);  // ★ 기존 히스토리에 수량 누적
+                found = true;
+                break;
+            }
+        }
+
+        // -------------------------------
+        // 2) 같은 이름이 없다면 복사본 추가
+        // -------------------------------
+        if (!found) {
+            Wine copy = new Wine(
+            		original.getName(),
+            		original.getPrice(),
+            		original.getType(),
+            		original.getCountry(),
+            		original.getWinery(),
+            		original.getGrape(),
+            		original.getAlcohol(),
+            		original.getYear()
+            		//original.getStock()
+            		//original.getImgPath()
+            );
+            //copy.imgPath = original.getImgPath();
+            history.historyitem.add(copy);
+        }
+
+        // -------------------------------
+        // 3) 원본 리스트에서 재고 감소 (0되면 삭제)
+        // -------------------------------
+        original.decreaseStock(buyQty);   // 재고 감소
+
+        if (original.getStock() == 0) {
+            winelist.remove(j);          // 재고 0이면 삭제
+        }
+
+        return amount;
+    }
 }
