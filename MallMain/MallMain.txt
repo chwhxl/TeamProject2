@@ -1,3 +1,0 @@
-MallMain
- ├─ MallMain/
- └─ img/
