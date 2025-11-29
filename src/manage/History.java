@@ -86,12 +86,12 @@ public class History extends JPanel {
         JButton back = new JButton("이전");
         hispanel.add(back);
         
-        back.addActionListener(e -> mainFrame.showCard("PAY"));
+        back.addActionListener(e -> mainFrame.showMainCard("PAY"));
         // 이전 버튼
         JButton home = new JButton("홈으로");
         hispanel.add(home);
         
-        home.addActionListener(e -> mainFrame.showCard("HOME"));
+        home.addActionListener(e -> mainFrame.showMainCard("HOME"));
         // 스크롤 포함
         JScrollPane scroll = new JScrollPane(
             hispanel,
