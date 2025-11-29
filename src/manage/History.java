@@ -8,11 +8,11 @@ import javax.swing.border.Border;
 import mallmain.*;
 import wineshop.Wine;
 
-public class history extends JPanel {
-    public static ArrayList<Wine> historyitem = new ArrayList<>();
+public class History extends JPanel {
+    public static ArrayList<HistoryProduct> historyList = new ArrayList<>();
     public static JPanel hispanel = new JPanel();  // 스크롤 내부 panel
 
-    public history(Main mainFrame) {
+    public History(Main mainFrame) {
 
         setLayout(new BorderLayout());  // 패널의 기본 레이아웃
 
@@ -20,7 +20,7 @@ public class history extends JPanel {
         hispanel.setLayout(new GridLayout(0, 1));
 
         // 아이템 리스트 표시
-        for (int i = 0; i < historyitem.size(); i++) {
+        for (int i = 0; i < historyList.size(); i++) {
             final int index = i;
 
             JPanel itemPanel = new JPanel();
@@ -45,12 +45,12 @@ public class history extends JPanel {
             btn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("이미지 클릭: " + historyitem.get(index).getName());
+                    System.out.println("이미지 클릭: " + historyList.get(index).getName());
                 }
             });
 
             // 이름 버튼
-            JButton bttn = new JButton(historyitem.get(index).getName());
+            JButton bttn = new JButton(historyList.get(index).getName());
             bttn.setBorderPainted(false);
             bttn.setContentAreaFilled(false);
             bttn.setFocusPainted(false);
@@ -63,12 +63,12 @@ public class history extends JPanel {
             bttn.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    System.out.println("이름 클릭: " + historyitem.get(index).getName());
+                    System.out.println("이름 클릭: " + historyList.get(index).getName());
                 }
             });
 
             // 가격 라벨
-            JLabel lbl = new JLabel("가격: " + historyitem.get(index).getPrice() + "원");
+            JLabel lbl = new JLabel("가격: " + historyList.get(index).getPrice() + "원");
             JPanel lblPanel = new JPanel(new GridBagLayout());
             lblPanel.setPreferredSize(lblSize);
             lblPanel.setBorder(border);
