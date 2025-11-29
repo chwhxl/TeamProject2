@@ -86,15 +86,11 @@ public class HomePanel extends JPanel{
 
             // 클릭 이벤트
             shopBtn.addActionListener(e -> {
-<<<<<<< HEAD
-                if (name.equals("wine")) mainFrame.showCard("WINE");
-                else if (name.equals("beer")) mainFrame.showCard("BEER");
-                else if (name.equals("whiskey")) mainFrame.showCard("WHISKEY");
-=======
+
                 if (name.equals("wine")) mainFrame.showMainCard("WINE");
                 else if (name.equals("beer")) mainFrame.showMainCard("BEER");
                 else if (name.equals("whiskey")) mainFrame.showMainCard("WHISKEY");
->>>>>>> branch 'master' of https://github.com/chwhxl/TeamProject2.git
+
             });
 
             buttonPanel.add(shopBtn);
