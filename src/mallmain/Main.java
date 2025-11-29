@@ -13,7 +13,7 @@ public class Main extends JFrame {
     private WineShopPanel winePanel;
     private WineShopPanel beerPanel;
     private WineShopPanel whiskeyPanel;
-    private JPanel PayPanel;
+    private JPanel PayPanel; // 임시 패널 나중에 카트 패널로 대체
     private JPanel HisPanel;
     public Main() {
     	// JFrame 기본 설정
@@ -38,7 +38,7 @@ public class Main extends JFrame {
         mainContainer.add(winePanel, "WINE");
         mainContainer.add(beerPanel, "BEER");
         mainContainer.add(whiskeyPanel, "WHISKEY");
-        mainContainer.add(PayPanel,"PAY");
+        mainContainer.add(PayPanel,"PAY"); //임시 패널, 나중에 카트패널로 대체
         mainContainer.add(HisPanel,"HISTORY");
         add(mainContainer);
         setVisible(true);
