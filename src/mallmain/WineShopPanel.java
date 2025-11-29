@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import wineshop.Wine;
 import wineshop.WineList;
+import wineshop.WineSearchResult;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,6 +23,10 @@ class WineShopPanel extends JPanel {
     private Main mainFrame;
 
     public WineShopPanel(Main mainFrame) {
+    	// 와인 데이터 로드
+    	WineList.loadWineData();
+    	
+    	// 홈 버튼 연결
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
         
@@ -63,7 +68,7 @@ class WineShopPanel extends JPanel {
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-        itSearch = new JTextField("검색어를 입력하세요.", 15);  // 검색창에 떠있을 멘트
+        itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {  // FocusListener 인터페이스
@@ -86,12 +91,12 @@ class WineShopPanel extends JPanel {
         searchPanel.add(itSearch);
         searchPanel.add(itButton);
 
-        // 카테고리+상품
+        // 카테고리+전체 상품
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
+        totalButton = new JButton("모든 상품");
         topCate1 = new JButton("생산지");
         topCate2 = new JButton("종류");
-        totalButton = new JButton("모든 상품");
         
         totalButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -127,7 +132,7 @@ class WineShopPanel extends JPanel {
 
         // 3행: 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
-
+        
         btLocation3.add(categoryPanel, BorderLayout.WEST);
         searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         btLocation3.add(searchPanel, BorderLayout.EAST);
@@ -136,7 +141,7 @@ class WineShopPanel extends JPanel {
 
         add(bigTopPanel, BorderLayout.NORTH);
 
-        // 카테고리 하위 버튼
+        // 카테고리 하위 버튼 - 생산지
         JPopupMenu prodMenu = new JPopupMenu();
         String[] country = {"FRANCE", "ITALY", "SPAIN"};
 
@@ -210,21 +215,25 @@ class WineShopPanel extends JPanel {
     	// Panel.repaint();
     }
     
+    // 전체 상품 showing
     private void showAllWine() {
         // 이전 검색 결과 삭제
         resultPanel.removeAll();
+        // 상품 진열 5행
+        resultPanel.setLayout(new GridLayout(0, 5, 15, 15));
         // 전체 아이템 출력
         for (Wine Wine : WineList.getWineList()) {
             // 카드 생성
-            // WineSearchResult card = new WineSearchResult(Wine);
+            WineSearchResult card = new WineSearchResult(Wine);
             // 카드 클릭 → 디테일 페이지 이동
-            // card.addMouseListener(new MouseAdapter() {
-                // @Override
-                // public void mouseClicked(MouseEvent e) {
-                    // moveToDetail(Wine);
-                // }
-            // });
-            // resultPanel.add(card);
+            /* card.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    moveToDetail(Wine);
+                }
+            });
+            */
+            resultPanel.add(card);
         }
         // 화면 갱신
         resultPanel.revalidate();
@@ -239,39 +248,42 @@ class WineShopPanel extends JPanel {
 
     // 생산지
     private void filterProd(String WineProd) {
-        updateResult(Wine -> Wine.getCountry().equals(WineProd));  // Wine class getter
+    	updateResult(Wine -> Wine.getCountry().trim().equalsIgnoreCase(WineProd.trim()));
     }
 
     // 종류
     private void filterType(String type) {
-        updateResult(Wine -> Wine.getType().equals(type));  // Wine class getter
+    	updateResult(Wine -> Wine.getType().trim().equalsIgnoreCase(type.trim()));
     }
 
     // 검색 결과, 카테고리 선택 결과
     private void updateResult(WineFilter filter) {
+    	// 이전 검색 결과 삭제
         resultPanel.removeAll();
+        // 상품 진열 5행
+        resultPanel.setLayout(new GridLayout(0, 5, 15, 15));
+        resultPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));
+
         
-        /*
         for (Wine Wine : WineList.getWineList()) {  // Wine/WineList class
             if (!filter.match(Wine)) continue;
 
             WineSearchResult card = new WineSearchResult(Wine);
-            card.addMouseListener(new MouseAdapter() {
+            /* card.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     moveToDetail(Wine);
                 }
             });
-
+			*/
             resultPanel.add(card);
         }
-        */
-
+        
         resultPanel.revalidate();
         resultPanel.repaint();
     }
 
-    // 상세 페이지
+    // 상세 페이지 -> 구현 필요
     private void moveToDetail(Wine Wine) {  // 임시 상세 페이지 이동
         mainPanel.removeAll();
         // mainPanel.add(new DetailPanel(Wine));
@@ -283,42 +295,4 @@ class WineShopPanel extends JPanel {
     private interface WineFilter {
         boolean match(Wine Wine);
     }
-	/*
-    public ShopPanel(Main mainFrame, String shopName, Color bgColor) {
-    	
-    	setLayout(new BorderLayout());
-    	setBackground(bgColor);
-
-        // 상단: 상점 이름
-        JLabel titleLabel = new JLabel(shopName + "에 오신 것을 환영합니다", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
-        add(titleLabel, BorderLayout.NORTH);
-
-        // 중앙: 상점 내용 (상태 유지가 잘 되는지 테스트하는 곳)
-        JPanel contentPanel = new JPanel();
-        contentPanel.setOpaque(false); // 투명하게 해서 배경색 보이게
-        contentPanel.setLayout(new FlowLayout());
-
-        contentPanel.add(new JLabel("장바구니 메모: "));
-        JTextField memoField = new JTextField(15); // 여기에 글을 쓰고 뒤로가기를 눌러보세요.
-        contentPanel.add(memoField);
-        
-        JCheckBox checkBox = new JCheckBox("쿠폰 적용하기");
-        checkBox.setOpaque(false);
-        contentPanel.add(checkBox);
-
-        add(contentPanel, BorderLayout.CENTER);
-
-        // 하단: 뒤로가기 버튼
-        JButton btnBack = new JButton("홈으로 돌아가기");
-        btnBack.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-        btnBack.setPreferredSize(new Dimension(100, 50));
-        
-        // 클릭하면 다시 HOME 화면을 보여달라고 요청
-        btnBack.addActionListener(e -> mainFrame.showMainCard("HOME"));
-        
-        add(btnBack, BorderLayout.SOUTH);
-    }
-    */
 }

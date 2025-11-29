@@ -30,6 +30,10 @@ public class Wine extends Product {
             this.imgPath = "data/wine/images/white/"+ name +".png";
         }
     }
+    
+    public String getName() {
+    	return name;
+    }
 
     public String getType() {
         return type;
