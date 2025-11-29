@@ -82,10 +82,4 @@ public class Wine {
     public String getImgPath() {
         return imgPath;
     }
-
-    @Override
-    public String toString() {
-        // 상품 상세 정보 출력
-        return "";
-    }
 }
