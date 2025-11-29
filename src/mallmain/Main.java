@@ -10,9 +10,9 @@ public class Main extends JFrame {
     private JPanel mainContainer;
     
     private HomePanel homePanel;
-    private ShopPanel winePanel;
-    private ShopPanel beerPanel;
-    private ShopPanel whiskeyPanel;
+    private WineShopPanel winePanel;
+    private WineShopPanel beerPanel;
+    private WineShopPanel whiskeyPanel;
     
     public Main() {
     	// JFrame 기본 설정
@@ -27,9 +27,9 @@ public class Main extends JFrame {
 
         // 1. 패널들을 미리 생성 -> 생성자에 'this'를 넘기는 이유는 패널들이 메인 프레임에게 화면 전환 요청하기 위함
         homePanel = new HomePanel(this);
-        winePanel = new ShopPanel(this, "와인 상점", new Color(255, 240, 240)); // 연한 빨강 배경
-        beerPanel = new ShopPanel(this, "맥주 상점", new Color(255, 255, 224)); // 연한 노랑 배경
-        whiskeyPanel = new ShopPanel(this, "위스키 상점", new Color(240, 248, 255)); // 연한 파랑 배경
+        winePanel = new WineShopPanel(this);
+        beerPanel = new WineShopPanel(this);
+        whiskeyPanel = new WineShopPanel(this);
 
         // 2. CardLayout에 패널들 등록 (이름표를 붙여줌)
         mainContainer.add(homePanel, "HOME");
