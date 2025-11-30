@@ -14,6 +14,7 @@ class WineShopPanel extends JPanel {
     private JButton itButton;
     private JButton homeButton;
     private JButton cartButton;
+    private JButton historyButton;
 
     private JButton topCate1, topCate2;
     private JButton totalButton;
@@ -45,7 +46,7 @@ class WineShopPanel extends JPanel {
         homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
         homePanel.add(homeButton);
         
-        // 장바구니 버튼 -> 장바구니 이동 수정
+        // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
         cartButton = new JButton("장바구니");
@@ -56,8 +57,18 @@ class WineShopPanel extends JPanel {
             @Override
             public void focusLost(FocusEvent e) {}
         });
+        
+        historyButton = new JButton("히스토리");
+        historyButton.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {}
+
+            @Override
+            public void focusLost(FocusEvent e) {}
+        });
 
         cartButton.addActionListener(e -> gotoCart());
+        cartPanel.add(historyButton);
         cartPanel.add(cartButton);
 
         // 샵 로고 -> 버튼으로 변경, shopmain으로 이동
@@ -200,7 +211,7 @@ class WineShopPanel extends JPanel {
         });
 
         // 결과
-        resultPanel = new JPanel(new FlowLayout());
+        resultPanel = new JPanel(new GridBagLayout());
         add(new JScrollPane(resultPanel), BorderLayout.CENTER);
         resultPanel.revalidate();
         resultPanel.repaint();
@@ -217,28 +228,37 @@ class WineShopPanel extends JPanel {
     
     // 전체 상품 showing
     private void showAllWine() {
-        // 이전 검색 결과 삭제
         resultPanel.removeAll();
-        // 상품 진열 5행
-        resultPanel.setLayout(new GridLayout(0, 5, 15, 15));
-        // 전체 아이템 출력
-        for (Wine Wine : WineList.getWineList()) {
-            // 카드 생성
-            WineSearchResult card = new WineSearchResult(Wine);
-            // 카드 클릭 → 디테일 페이지 이동
-            /* card.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    moveToDetail(Wine);
-                }
-            });
-            */
-            resultPanel.add(card);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.anchor = GridBagConstraints.NORTH;   // 카드 상단 고정
+
+        int col = 0;
+        int row = 0;
+
+        for (Wine wine : WineList.getWineList()) {
+
+            WineSearchResult card = new WineSearchResult(wine);
+
+            gbc.gridx = col;
+            gbc.gridy = row;
+
+            resultPanel.add(card, gbc);
+
+            col++;
+            if (col == 5) {
+                col = 0;
+                row++;
+            }
         }
+
         // 화면 갱신
         resultPanel.revalidate();
         resultPanel.repaint();
     }
+
+
 
     // 상품 검색
     private void searchName() {
@@ -253,32 +273,37 @@ class WineShopPanel extends JPanel {
 
     // 종류
     private void filterType(String type) {
-    	updateResult(Wine -> Wine.getType().trim().equalsIgnoreCase(type.trim()));
+    	updateResult(Wine -> Wine.getType().equalsIgnoreCase(type.trim()));
     }
 
     // 검색 결과, 카테고리 선택 결과
     private void updateResult(WineFilter filter) {
-    	// 이전 검색 결과 삭제
         resultPanel.removeAll();
-        // 상품 진열 5행
-        resultPanel.setLayout(new GridLayout(0, 5, 15, 15));
-        resultPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));
 
-        
-        for (Wine Wine : WineList.getWineList()) {  // Wine/WineList class
-            if (!filter.match(Wine)) continue;
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.anchor = GridBagConstraints.NORTH;   // 카드 상단 고정
 
-            WineSearchResult card = new WineSearchResult(Wine);
-            /* card.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    moveToDetail(Wine);
-                }
-            });
-			*/
-            resultPanel.add(card);
+        int col = 0;
+        int row = 0;
+
+        for (Wine wine : WineList.getWineList()) {
+            if (!filter.match(wine)) continue;
+
+            WineSearchResult card = new WineSearchResult(wine);
+
+            gbc.gridx = col;
+            gbc.gridy = row;
+            resultPanel.add(card, gbc);
+
+            col++;
+            if (col == 5) {
+                col = 0;
+                row++;
+            }
         }
-        
+
+        // 화면 갱신
         resultPanel.revalidate();
         resultPanel.repaint();
     }
