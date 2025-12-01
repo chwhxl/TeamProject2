@@ -19,25 +19,7 @@ public class Payment {
 		} 
 			
     	product.setStock(product.getStock() - buyQuantity);
-    	addHistoryProduct(product.getName(), product.getPrice(), buyQuantity);
+    	HistoryManage.addHistory(product.getName(), product.getPrice(), buyQuantity);
     	return true;
-    }
-    
-    public static void addHistoryProduct(String name, int price, int quantity) {
-    	
-    	boolean found = false;
-    	
-    	for (HistoryProduct hp : History.historyList) {
-			if (hp.getName().equals(name)) {
-				hp.setQuantity(hp.getQuantity() + quantity);
-				found = true;
-				break;
-			}
-		}
-    	
-    	if (!found) {
-    		HistoryProduct historyProduct = new HistoryProduct(name, price, quantity);
-    		History.historyList.add(historyProduct);
-    	}
     }
 }

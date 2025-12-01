@@ -32,7 +32,7 @@ public class Main extends JFrame {
         beerPanel = new WineShopPanel(this);
         whiskeyPanel = new WineShopPanel(this);
         PayPanel = new manage.pay(this);
-        HisPanel = new manage.History(this);
+        HisPanel = new manage.HisPanel(this);
         // 2. CardLayout에 패널들 등록 (이름표를 붙여줌)
         mainContainer.add(homePanel, "HOME");
         mainContainer.add(winePanel, "WINE");

@@ -68,6 +68,7 @@ class WineShopPanel extends JPanel {
         });
 
         cartButton.addActionListener(e -> gotoCart());
+        historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
         cartPanel.add(cartButton);
 
