@@ -20,9 +20,9 @@ public class Wine extends Product {
         this.year = year;
         this.stock = 10;
 
-        if (type.equals("Sparkling wine")) {
+        if (type.equals("Sparkling")) {
             this.imgPath = "data/wine/images/sparkling/"+ name +".png";
-        } else if (type.equals("Red wine")) {
+        } else if (type.equals("Red")) {
             this.imgPath = "data/wine/images/red/"+ name +".png";
         } else {
             this.imgPath = "data/wine/images/white/"+ name +".png";

@@ -19,10 +19,19 @@ public class WineSearchResult extends JPanel{
 
         // 상품 이미지 
         JLabel imgLabel;
-        if (wine.getImgPath() != null && !wine.getImgPath().isEmpty()) {
-        	ImageIcon icon = new ImageIcon(wine.getImgPath());
-        	Image scaledImg = icon.getImage().getScaledInstance(-1, 175, Image.SCALE_SMOOTH);
-        	imgLabel = new JLabel(new ImageIcon(scaledImg));
+        String imgPath = wine.getImgPath();
+        
+        if (imgPath != null && !imgPath.isEmpty()) {
+            ImageIcon icon = new ImageIcon(imgPath);
+            
+        	if (icon.getIconWidth() > 0) {
+            	Image scaledImg = icon.getImage().getScaledInstance(-1, 175, Image.SCALE_SMOOTH);
+            	imgLabel = new JLabel(new ImageIcon(scaledImg));
+            } else {
+            	System.out.println("이미지 로드 실패: " + imgPath);
+            	imgLabel = new JLabel("X", JLabel.CENTER);
+            	imgLabel.setForeground(Color.RED);
+            }
         } else {
         	imgLabel = new JLabel("이미지 없음", JLabel.CENTER);
         }

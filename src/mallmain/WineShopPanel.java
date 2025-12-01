@@ -214,17 +214,9 @@ class WineShopPanel extends JPanel {
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
         add(new JScrollPane(resultPanel), BorderLayout.CENTER);
+        showAllWine();
         resultPanel.revalidate();
         resultPanel.repaint();
-    }
-
-	// 장바구니 가기
-    private void gotoCart() {
-    	// Cart cartPanel = new MallMain();
-    	// Panel.removeAll();                        
-    	// Panel.add(cartPanel);
-    	// Panel.revalidate();
-    	// Panel.repaint();
     }
     
     // 전체 상품 showing
