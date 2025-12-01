@@ -32,7 +32,6 @@ public class CartPanel extends JPanel {
 
     private void initUI() {
         setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
 
         // 상단 제목
         JLabel titleLabel = new JLabel("장바구니 (Cart)", SwingConstants.CENTER);

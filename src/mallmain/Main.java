@@ -13,9 +13,10 @@ public class Main extends JFrame {
     private WineShopPanel winePanel;
     private WineShopPanel beerPanel;
     private WineShopPanel whiskeyPanel;
-    private JPanel PayPanel; // 임시 패널 나중에 카트 패널로 대체
-    private JPanel HisPanel;
+    private JPanel cartPanel; 
+    private JPanel hisPanel;
     public Main() {
+    	
     	// JFrame 기본 설정
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫기 시 프로그램 종료
         setTitle("Mall Main"); // 창 제목 설정
@@ -31,21 +32,35 @@ public class Main extends JFrame {
         winePanel = new WineShopPanel(this);
         beerPanel = new WineShopPanel(this);
         whiskeyPanel = new WineShopPanel(this);
-        PayPanel = new manage.CartPanel(this);
-        HisPanel = new manage.HisPanel(this);
+        cartPanel = new manage.CartPanel(this);
+        hisPanel = new manage.HisPanel(this);
+        
         // 2. CardLayout에 패널들 등록 (이름표를 붙여줌)
         mainContainer.add(homePanel, "HOME");
         mainContainer.add(winePanel, "WINE");
         mainContainer.add(beerPanel, "BEER");
         mainContainer.add(whiskeyPanel, "WHISKEY");
-        mainContainer.add(PayPanel,"PAY"); //임시 패널, 나중에 카트패널로 대체
-        mainContainer.add(HisPanel,"HISTORY");
+        mainContainer.add(cartPanel,"CART"); 
+        mainContainer.add(hisPanel,"HISTORY");
         add(mainContainer);
         setVisible(true);
     }
 
     // 화면 전환을 담당하는 메서드
     public void showMainCard(String cardName) {
+    	
+    	if (cardName.equals("CART")) {
+    		if (cartPanel instanceof manage.CartPanel) {
+    			((manage.CartPanel)cartPanel).refreshCart();
+    		}
+    	}
+    	
+    	if (cardName.equals("HISTORY")) {
+    		if (hisPanel instanceof manage.HisPanel) {
+				((manage.HisPanel)hisPanel).refreshHistory();
+			}
+    	}
+    	
         mainLayout.show(mainContainer, cardName);
     }
 

@@ -35,7 +35,7 @@ public class CartManage {
     }
 
     // Cart 총 합계 금액 계산
-    public int getTotalPrice() {
+    public static int getTotalPrice() {
         int totalPrice = 0;
         for (CartProduct cartWine : cartMap.values()) {
             totalPrice += cartWine.getProductTotalPrice();

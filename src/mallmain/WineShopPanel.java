@@ -67,7 +67,7 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
-        cartButton.addActionListener(e -> gotoCart());
+        cartButton.addActionListener(e -> mainFrame.showMainCard("CART"));
         historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
         cartPanel.add(cartButton);
