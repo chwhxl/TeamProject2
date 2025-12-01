@@ -21,14 +21,14 @@ public class WineSearchResult extends JPanel{
         JLabel imgLabel;
         if (wine.getImgPath() != null && !wine.getImgPath().isEmpty()) {
         	ImageIcon icon = new ImageIcon(wine.getImgPath());
-        	Image scaledImg = icon.getImage().getScaledInstance(50, 180, Image.SCALE_SMOOTH);
+        	Image scaledImg = icon.getImage().getScaledInstance(-1, 175, Image.SCALE_SMOOTH);
         	imgLabel = new JLabel(new ImageIcon(scaledImg));
         } else {
         	imgLabel = new JLabel("이미지 없음", JLabel.CENTER);
         }
         
         imgLabel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        imgLabel.setPreferredSize(new Dimension(50, 180));
+        imgLabel.setPreferredSize(new Dimension(100, 180));
         add(imgLabel, BorderLayout.NORTH);
         
         // 상품명 / 가격 / 도수

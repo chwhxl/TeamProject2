@@ -5,16 +5,13 @@ import wineshop.*;
 
 public class Payment {
 	
-    public static boolean payOneProduct(int index) {
+    public static boolean payOneProduct(CartProduct cartProduct) {
     	
-    	List<CartProduct> cartList = CartManage.getCartList();
-    	
-    	CartProduct cartProduct = cartList.get(index);
 		Product product = cartProduct.getProduct();	
 		int buyQuantity = cartProduct.getQuantity();
     	
     	if (product.getStock() < buyQuantity) {
-			System.out.println("재고가 부족합니다.");
+			System.out.println("재고가 부족합니다." + product.getName());
 			return false;	
 		} 
 			

@@ -138,7 +138,8 @@ public class CartPanel extends JPanel {
     }
 
     private void updateTotalPrice() {
-        int total = 0;
+        
+    	int total = 0;
         for (CartProduct cp : selectedItems) {
             total += cp.getProductTotalPrice();
         }
@@ -146,31 +147,77 @@ public class CartPanel extends JPanel {
     }
 
     private void handlePay() {
+    	
         if (selectedItems.isEmpty()) {
             JOptionPane.showMessageDialog(this, "결제할 상품을 선택해주세요.");
             return;
         }
-
-        int result = JOptionPane.showConfirmDialog(this, "선택한 상품을 결제하시겠습니까?", "결제 확인", JOptionPane.YES_NO_OPTION);
         
-        if (result == JOptionPane.YES_OPTION) {
-            // 결제 처리 (Payment 클래스 이용 or 직접 구현)
-            // 여기서는 간단하게 재고 차감 및 히스토리 추가 로직 호출
-            
-            for (CartProduct cp : selectedItems) {
-                // Payment.payOneProduct() 같은 메서드를 수정해서 CartProduct를 받게 하면 좋음
-                // 예: Payment.processPayment(cp);
-                
-                // 결제 완료 후 장바구니에서 제거
-                CartManage.removeCart(cp, cp.getQuantity()); // 전체 삭제
-            }
-            
-            JOptionPane.showMessageDialog(this, "결제가 완료되었습니다.");
-            
-            // 화면 갱신 및 히스토리로 이동
-            refreshCart();
-            mainFrame.showMainCard("HISTORY"); // 히스토리 화면으로 이동 (MainFrame에 메서드 있어야 함)
+        JPanel inputPanel = new JPanel(new GridLayout(2, 2, 5, 5));
+        JTextField nameField = new JTextField();
+        JTextField phoneField = new JTextField();
+        
+        inputPanel.add(new JLabel("이름:"));
+        inputPanel.add(nameField);
+        inputPanel.add(new JLabel("전화번호:"));
+        inputPanel.add(phoneField);
+        
+        int result = JOptionPane.showConfirmDialog(this, inputPanel, "결제 정보 입력", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (result != JOptionPane.OK_OPTION) {
+			return; 
+		}
+        
+        if (nameField.getText().trim().isEmpty() || phoneField.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "이름과 전화번호를 모두 입력해주세요.");
+			return;
+		}
+        
+        int confirm = JOptionPane.showConfirmDialog(this, "선택한 상품을 결제하시겠습니까?", "결제 확인", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) return;
+        
+        JProgressBar progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true);
+        
+        JOptionPane loadingPane = new JOptionPane("결제 승인 중... 잠시만기다려주세요.",
+        										  JOptionPane.INFORMATION_MESSAGE,
+        										  JOptionPane.DEFAULT_OPTION,
+        										  null,
+        										  new Object[]{},
+        										  null);
+        
+       JDialog loadingDialog = loadingPane.createDialog(this, "결제 진 중");
+       
+       Timer timer = new Timer(3000, e -> {
+    	   loadingDialog.dispose();
+    	   processPayment();
+       });
+       
+       timer.setRepeats(false);
+       timer.start();
+       
+       loadingDialog.setVisible(true);
+    }
+        		
+    private void processPayment() {
+    	List<CartProduct> successItems = new ArrayList<>();
+    	
+    	for (CartProduct cp : selectedItems) {
+    		boolean success = Payment.payOneProduct(cp);
+    		
+    		if (success) {
+				successItems.add(cp);
+			}
+    	}
+    	
+    	for (CartProduct cp : successItems) {
+            CartManage.removeCart(cp, cp.getQuantity());
         }
+        
+        JOptionPane.showMessageDialog(this, "결제가 완료되었습니다!");
+        
+        refreshCart(); 
+        mainFrame.showMainCard("HISTORY");
     }
     
     private void handleDelete() {
