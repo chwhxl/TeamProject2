@@ -1,1 +1,1 @@
-package whiskeyshop;
+package liquorshop;

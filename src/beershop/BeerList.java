@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 public class BeerList {
 
     private static List<Beer> beerList = new ArrayList<>();
-    private static String filePath = "data/beer/Beer.csv";
+    private static String filePath = "data/beer/beer.csv";
 
     public static List<Beer> getBeerList() {
         return beerList;
