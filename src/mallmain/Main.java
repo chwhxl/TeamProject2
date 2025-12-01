@@ -13,8 +13,11 @@ public class Main extends JFrame {
     private WineShopPanel winePanel;
     private WineShopPanel beerPanel;
     private WineShopPanel whiskeyPanel;
+    
     private JPanel cartPanel; 
     private JPanel hisPanel;
+    private String lastCardName = "HOME";
+    
     public Main() {
     	
     	// JFrame 기본 설정
@@ -48,7 +51,12 @@ public class Main extends JFrame {
 
     // 화면 전환을 담당하는 메서드
     public void showMainCard(String cardName) {
+    	// 마지막으로 본 카드 이름 저장 (CART와 HISTORY는 제외)
+    	if (!cardName.equals("CART") && !cardName.equals("HISTORY")) {
+			this.lastCardName = cardName;
+		}
     	
+    	// 화면 전환 전에 해당 패널의 새로고침 메서드 호출
     	if (cardName.equals("CART")) {
     		if (cartPanel instanceof manage.CartPanel) {
     			((manage.CartPanel)cartPanel).refreshCart();
@@ -63,6 +71,10 @@ public class Main extends JFrame {
     	
         mainLayout.show(mainContainer, cardName);
     }
+    
+    public void goBack() {
+		showMainCard(this.lastCardName);
+	}
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Main());

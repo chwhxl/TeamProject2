@@ -17,6 +17,9 @@ public class CartPanel extends JPanel {
     private JPanel listPanel;
     private JLabel totalLabel;
     
+    private JScrollPane scrollPane;
+    private JLabel emptyLabel;
+    
     // 장바구니에서 선택된 아이템들의 목록 (결제 대상)
     private List<CartProduct> selectedItems = new ArrayList<>();
 
@@ -43,10 +46,16 @@ public class CartPanel extends JPanel {
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); // 세로 정렬 수정
         
-        JScrollPane scroll = new JScrollPane(listPanel,
+        scrollPane = new JScrollPane(listPanel,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        add(scroll, BorderLayout.CENTER);
+        
+        // 장바구니가 비어있을 때 보여줄 라벨
+        emptyLabel = new JLabel("장바구니가 비어있습니다.", SwingConstants.CENTER);
+        emptyLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+        emptyLabel.setForeground(Color.GRAY);
+        
+        add(scrollPane, BorderLayout.CENTER);
 
         // 하단 패널
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
@@ -54,17 +63,17 @@ public class CartPanel extends JPanel {
 
         JButton btnPay = new JButton("선택 상품 결제");
         JButton btnDelete = new JButton("선택 삭제");
-        JButton btnHome = new JButton("쇼핑 계속하기");
+        JButton btnBack = new JButton("쇼핑 계속하기");
 
         // 이벤트 연결
         btnPay.addActionListener(e -> handlePay());
         btnDelete.addActionListener(e -> handleDelete());
-        btnHome.addActionListener(e -> mainFrame.showMainCard("HOME")); // 혹은 상점 목록으로
+        btnBack.addActionListener(e -> mainFrame.goBack()); 
 
         bottomPanel.add(totalLabel);
         bottomPanel.add(btnDelete);
         bottomPanel.add(btnPay);
-        bottomPanel.add(btnHome);
+        bottomPanel.add(btnBack);
 
         add(bottomPanel, BorderLayout.SOUTH);
     }
@@ -73,12 +82,20 @@ public class CartPanel extends JPanel {
         listPanel.removeAll();
         selectedItems.clear(); // 선택 목록 초기화
 
-        // 1. CartManage에서 데이터 가져오기 (여기가 바뀜!)
+        // CartManage에서 데이터 가져오기
         List<CartProduct> cartList = CartManage.getCartList();
 
+        // 장바구니 상품 유무에 따라 화면 교체
         if (cartList.isEmpty()) {
-            listPanel.add(new JLabel("장바구니가 비어있습니다."));
+        	// 스크롤 패널 제거하고 빈 라벨을 붙임
+            remove(scrollPane);
+            add(emptyLabel, BorderLayout.CENTER);
+            totalLabel.setText("선택 상품 총액: 0원");
         } else {
+        	// 빈 라벨 제거하고 스크롤 패널을 붙임
+        	remove(emptyLabel);
+        	add(scrollPane, BorderLayout.CENTER);
+        	
             Border border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY);
 
             for (CartProduct cp : cartList) {
@@ -97,6 +114,9 @@ public class CartPanel extends JPanel {
                         selectedItems.remove(cp);
                     }
                     updateTotalPrice();
+                    
+                    revalidate();
+                    repaint();
                 });
 
                 // 정보 라벨
