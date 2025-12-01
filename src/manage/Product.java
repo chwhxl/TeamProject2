@@ -4,15 +4,19 @@ public abstract class Product {
 	
     protected String name;
     protected int price;
+    protected String type;
     protected double alcohol;
     protected int stock;
     protected String imgPath;
 
-    public Product(String name, int price, double alcohol) {
+    public Product(String name, int price, String type, double alcohol) {
         this.name = name;
         this.price = price;
+        this.type = type;
         this.alcohol = alcohol;
     }
+    
+    public abstract String getCategory();
 
     public String getName() {
         return name;
@@ -21,6 +25,10 @@ public abstract class Product {
     public int getPrice() {
         return price;
     }
+    
+    public String getType() {
+		return type;
+	}
 
     public double getAlcohol() {
         return alcohol;
@@ -38,4 +46,3 @@ public abstract class Product {
         return imgPath;
     }
 }
-

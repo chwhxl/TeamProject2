@@ -3,19 +3,17 @@ package wineshop;
 import manage.Product;
 
 public class Wine extends Product {
-
-    private String type;       // 종류
-    private String country;    // 원산지
-    private String winery;     // 생산 와이너리
-    private String grape;      // 포도 품종
-    private String year;       // 생산 연도
+      
+    private String country;    
+    private String winery;     
+    private String grape;      
+    private String year;       
 
     public Wine(String name, int price, String type, String country,
                 String winery, String grape, double alcohol, String year) {
         
-    	super(name, price, alcohol);
+    	super(name, price, type, alcohol);
         
-        this.type = type;
         this.country = country;
         this.winery = winery;
         this.grape = grape;
@@ -31,13 +29,10 @@ public class Wine extends Product {
         }
     }
     
-    public String getName() {
-    	return name;
-    }
-
-    public String getType() {
-        return type;
-    }
+    @Override
+    public String getCategory() {
+		return "Wine";
+	}
 
     public String getCountry() {
         return country;
