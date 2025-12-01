@@ -1,5 +1,4 @@
 name,price,type,winery,country,grape,alcohol,year
-Brut (Carte Jaune) Champagne,93900,Sparkling,France,Veuve Clicquot,Pinot Noir/Chardonnay/Pinot Meunier,12,N.V.
 Brut Champagne,484900,Sparkling,France,Dom Pérignon,Pinot Noir/Chardonnay,12.5,2008
 Brut Gold Champagne,579900,Sparkling,France,Armand de Brignac,Chardonnay/Pinot Noir/Pinot Meunier,12.5,N.V.
 Cava Kripta Gran Reserva Brut Nature,197900,Sparkling,Spain,Agusti Torello Mata,Macabeo/Xarel-ro/Parellada,11.5,2007
@@ -28,5 +27,4 @@ I Frati Lugana,25900,White,Italy,Cà dei Frati,Turbiana,13,2022
 Napa Valley Chardonnay,54900,White,United States,Beringer,Chardonnay,14,2005
 Sauvignon Blanc,54900,White,New Zealand,Kim Crawford,Sauvignon Blanc,12.5,2020
 Singerriedel - Riesling Smaragd,212900,White,Austria,Franz Hirzberger,Riesling,14,2024
-
 Vigna Senza Nome Moscato d'Asti,41900,White,Italy,Braida,Moscato Bianco,5.5,N.V.
