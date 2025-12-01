@@ -3,6 +3,7 @@ package wineshop;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.*;
 import manage.CartManage;
 
 public class WineSearchResult extends JPanel{
@@ -33,7 +34,9 @@ public class WineSearchResult extends JPanel{
         // 상품명 / 가격 / 도수
         JPanel infoPanel = new JPanel(new GridLayout(3, 1));
         JLabel name = new JLabel(wine.getName(), JLabel.CENTER);
-        JLabel price = new JLabel(wine.getPrice() + "원", JLabel.CENTER);
+        DecimalFormat df = new DecimalFormat("#,###");
+        String formattedPrice = df.format(wine.getPrice());
+        JLabel price = new JLabel(formattedPrice + "원", JLabel.CENTER);
         JLabel alc = new JLabel(wine.getAlcohol() + "%", JLabel.CENTER);
         
         infoPanel.add(name);
