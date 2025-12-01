@@ -29,7 +29,6 @@ public class HomePanel extends JPanel{
         	JButton shopBtn = new JButton() {
         	    @Override
         	    public boolean contains(int x, int y) {
-        	        // 1. 현재 버튼의 크기 구하기
         	        int w = getWidth();
         	        int h = getHeight();
         	        
@@ -53,7 +52,7 @@ public class HomePanel extends JPanel{
                 ImageIcon realIcon = new ImageIcon(scaledImg);
                 
 
-                // 진짜 이미지와 크기는 똑같지만, 내용은 텅 빈 투명 이미지를 만듭니다.
+                // 진짜 이미지와 크기는 똑같지만, 내용은 텅 빈 투명 이미지
                 BufferedImage transparentImg = new BufferedImage(
                         realIcon.getIconWidth(), realIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
                 ImageIcon transparentIcon = new ImageIcon(transparentImg);
@@ -62,18 +61,6 @@ public class HomePanel extends JPanel{
                 shopBtn.setRolloverIcon(realIcon);       // 마우스 올림: 진짜 이미지 (보임)
                 shopBtn.setPressedIcon(realIcon);        // 클릭 중: 진짜 이미지 유지
                 
-                // 4. 위치 잡기 (realIcon 크기 기준)
-//                int width = realIcon.getIconWidth();
-//                int height = realIcon.getIconHeight();
-//                int yPos = 100;
-//
-//                if (name.equals("wine")) {
-//                    shopBtn.setBounds(450, yPos, width, height);
-//                } else if (name.equals("whiskey")) {
-//                    shopBtn.setBounds(680, yPos+50, width, height);
-//                } else if (name.equals("beer")) {
-//                    shopBtn.setBounds(800, yPos+100, width, height);
-//                }
                 
                 int frameWidth = mainFrame.getWidth();
                 int frameHeight = mainFrame.getHeight();
