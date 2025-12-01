@@ -63,17 +63,39 @@ public class HomePanel extends JPanel{
                 shopBtn.setPressedIcon(realIcon);        // 클릭 중: 진짜 이미지 유지
                 
                 // 4. 위치 잡기 (realIcon 크기 기준)
+//                int width = realIcon.getIconWidth();
+//                int height = realIcon.getIconHeight();
+//                int yPos = 100;
+//
+//                if (name.equals("wine")) {
+//                    shopBtn.setBounds(450, yPos, width, height);
+//                } else if (name.equals("whiskey")) {
+//                    shopBtn.setBounds(680, yPos+50, width, height);
+//                } else if (name.equals("beer")) {
+//                    shopBtn.setBounds(800, yPos+100, width, height);
+//                }
+                
+                int frameWidth = mainFrame.getWidth();
+                int frameHeight = mainFrame.getHeight();
+                
                 int width = realIcon.getIconWidth();
                 int height = realIcon.getIconHeight();
-                int yPos = 100;
-
+                int mywidth = (int)(width/2);
+                int myheight = (int)(height/2);
+                
                 if (name.equals("wine")) {
-                    shopBtn.setBounds(450, yPos, width, height);
+                	int x = (int)(frameWidth * 0.405) - mywidth;
+                    int y = (int)(frameHeight * 0.48) - myheight;
+                    shopBtn.setBounds(x,y, width, height);
                 } else if (name.equals("whiskey")) {
-                    shopBtn.setBounds(680, yPos+50, width, height);
+                	int x = (int)(frameWidth * 0.55) - mywidth;
+                    int y = (int)(frameHeight * 0.5) - myheight;
+                    shopBtn.setBounds(x,y, width, height);
                 } else if (name.equals("beer")) {
-                    shopBtn.setBounds(800, yPos+100, width, height);
-                }
+                	int x = (int)(frameWidth * 0.64) - mywidth;
+                    int y = (int)(frameHeight * 0.60) - myheight;
+                    shopBtn.setBounds(x,y, width, height);                }
+                
             } else {
                 System.err.println("Couldn't find image: " + imgPath);
             }
