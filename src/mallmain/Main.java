@@ -23,7 +23,7 @@ public class Main extends JFrame {
     	// JFrame 기본 설정
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 닫기 시 프로그램 종료
         setTitle("Mall Main"); // 창 제목 설정
-        setSize(1600, 900); // MainFrame 크기 1600 x 900
+        setSize(1280, 720); // MainFrame 크기 1600 x 900
         setResizable(false);
         
         // CardLayout 설정
