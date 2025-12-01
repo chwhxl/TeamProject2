@@ -1,13 +1,12 @@
 package mallmain;
 
-import javax.swing.*;
-
 import wineshop.Wine;
 import wineshop.WineList;
 import wineshop.WineSearchResult;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 class WineShopPanel extends JPanel {
 	private JTextField itSearch;
@@ -72,7 +71,7 @@ class WineShopPanel extends JPanel {
         cartPanel.add(historyButton);
         cartPanel.add(cartButton);
 
-        // 샵 로고 -> 버튼으로 변경, shopmain으로 이동
+        // 샵 로고 -> 버튼으로 변경(아직), shopmain으로 이동
         JLabel shopLogo = new JLabel("> 가나디 포도밭 <", SwingConstants.CENTER);
         
         shopLogo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -107,8 +106,7 @@ class WineShopPanel extends JPanel {
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         totalButton = new JButton("모든 상품");
-        topCate1 = new JButton("생산지");
-        topCate2 = new JButton("종류");
+        topCate1 = new JButton("종류");
         
         totalButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -122,7 +120,6 @@ class WineShopPanel extends JPanel {
 
         categoryPanel.add(totalButton);
         categoryPanel.add(topCate1);
-        categoryPanel.add(topCate2);
 
         // 버튼 위치 3행 1열
         JPanel bigTopPanel = new JPanel(new GridLayout(3, 1));
@@ -154,35 +151,6 @@ class WineShopPanel extends JPanel {
         add(bigTopPanel, BorderLayout.NORTH);
 
         // 카테고리 하위 버튼 - 생산지
-        JPopupMenu prodMenu = new JPopupMenu();
-        String[] country = {"FRANCE", "ITALY", "SPAIN"};
-
-        for (String prodWine : country) {
-            JMenuItem Wine = new JMenuItem(prodWine);
-            prodMenu.add(Wine);
-
-            Wine.addActionListener(e -> filterProd(prodWine));
-        }
-
-        topCate1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                prodMenu.show(topCate1, 0, topCate1.getHeight());
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                Timer t = new Timer(120, ev -> {
-                    if (!prodMenu.isShowing()) {
-                        prodMenu.setVisible(false);
-                    }
-                });
-                t.setRepeats(false);
-                t.start();
-            }
-        });
-
-        // 카테고리 하위 버튼
         JPopupMenu typeMenu = new JPopupMenu();
         String[] types = {"RED", "WHITE", "SPARKLING"};
 
@@ -190,13 +158,13 @@ class WineShopPanel extends JPanel {
             JMenuItem Wine = new JMenuItem(type);
             typeMenu.add(Wine);
 
-            Wine.addActionListener(e -> filterType(type));
+            Wine.addActionListener(e -> filterType(type));  // filterProd
         }
 
-        topCate2.addMouseListener(new MouseAdapter() {
+        topCate1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                typeMenu.show(topCate2, 0, topCate2.getHeight());
+                typeMenu.show(topCate1, 0, topCate1.getHeight());
             }
 
             @Override
@@ -258,15 +226,9 @@ class WineShopPanel extends JPanel {
         String key = itSearch.getText().trim().toLowerCase();  // 대소문자 구별 없음
         updateResult(Wine -> Wine.getName().toLowerCase().contains(key));
     }
-
-    // 생산지
-    private void filterProd(String WineProd) {
-    	updateResult(Wine -> Wine.getCountry().trim().equalsIgnoreCase(WineProd.trim()));
-    }
-
     // 종류
     private void filterType(String type) {
-    	updateResult(Wine -> Wine.getType().equalsIgnoreCase(type.trim()));
+    	updateResult(Wine -> Wine.getCategory().trim().equalsIgnoreCase(type.trim()));
     }
 
     // 검색 결과, 카테고리 선택 결과
