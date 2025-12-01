@@ -14,6 +14,7 @@ class WineShopPanel extends JPanel {
     private JButton homeButton;
     private JButton cartButton;
     private JButton historyButton;
+    private JButton bar;
 
     private JButton topCate1, topCate2;
     private JButton totalButton;
@@ -34,10 +35,11 @@ class WineShopPanel extends JPanel {
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         homeButton = new JButton("홈");
+        Main.MyFont(homeButton);
         homeButton.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {}
-
+ 
             @Override
             public void focusLost(FocusEvent e) {}
         });
@@ -48,7 +50,8 @@ class WineShopPanel extends JPanel {
         // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
-        cartButton = new JButton("장바구니");
+        cartButton = new JButton("장바구니       ");
+		Main.MyFont(cartButton);
         cartButton.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {}
@@ -57,7 +60,12 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
         
-        historyButton = new JButton("히스토리");
+        bar = new JButton("|");
+		Main.MyFont(bar);
+		bar.setBounds(510, 25, 2, 15);
+
+        historyButton = new JButton("구매 이력");
+        Main.MyFont(historyButton);
         historyButton.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {}
@@ -69,15 +77,17 @@ class WineShopPanel extends JPanel {
         cartButton.addActionListener(e -> mainFrame.showMainCard("CART"));
         historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
+        cartPanel.add(bar);
         cartPanel.add(cartButton);
+       
 
         // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
-        shopLogo.setBorderPainted(true);   // 외곽선 제거 원하면 flase로 변경
+        shopLogo.setBorderPainted(false);   // 외곽선 제거 원하면 flase로 변경
         shopLogo.setContentAreaFilled(false); // 배경 채움 제거
         shopLogo.setMargin(new Insets(0, 0, 0, 0)); // 여백 제거
 
 
-        shopLogo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+        shopLogo.setFont(new Font("Noto Sans KR", Font.BOLD, 20));
         
         shopLogo.addActionListener(e -> mainFrame.showMainCard("HOME"));
         // 검색
@@ -101,6 +111,7 @@ class WineShopPanel extends JPanel {
         });
 
         itButton = new JButton("검색");
+        Main.MyFont(itButton);
         itButton.addActionListener(e -> searchName());
 
         searchPanel.add(itSearch);
@@ -110,7 +121,9 @@ class WineShopPanel extends JPanel {
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         totalButton = new JButton("모든 상품");
+        Main.MyFont(totalButton);
         topCate1 = new JButton("종류");
+        Main.MyFont(topCate1);
         
         totalButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -185,7 +198,9 @@ class WineShopPanel extends JPanel {
 
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
-        add(new JScrollPane(resultPanel), BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(resultPanel);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        add(scrollPane, BorderLayout.CENTER);
         showAllWine();
         resultPanel.revalidate();
         resultPanel.repaint();
