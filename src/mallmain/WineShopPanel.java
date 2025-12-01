@@ -18,10 +18,10 @@ class WineShopPanel extends JPanel {
     private JButton topCate1, topCate2;
     private JButton totalButton;
     private JPanel resultPanel;
-
     private JPanel mainPanel;
     private Main mainFrame;
-
+	private JButton shopLogo = new JButton("> 가나디 포도밭 <"); //샵 로고 나오면 이미지로 대체 가능
+	
     public WineShopPanel(Main mainFrame) {
     	// 와인 데이터 로드
     	WineList.loadWineData();
@@ -71,11 +71,15 @@ class WineShopPanel extends JPanel {
         cartPanel.add(historyButton);
         cartPanel.add(cartButton);
 
-        // 샵 로고 -> 버튼으로 변경(아직), shopmain으로 이동
-        JLabel shopLogo = new JLabel("> 가나디 포도밭 <", SwingConstants.CENTER);
-        
-        shopLogo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+        // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
+        shopLogo.setBorderPainted(true);   // 외곽선 제거 원하면 flase로 변경
+        shopLogo.setContentAreaFilled(false); // 배경 채움 제거
+        shopLogo.setMargin(new Insets(0, 0, 0, 0)); // 여백 제거
 
+
+        shopLogo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+        
+        shopLogo.addActionListener(e -> mainFrame.showMainCard("HOME"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -125,9 +129,9 @@ class WineShopPanel extends JPanel {
         JPanel bigTopPanel = new JPanel(new GridLayout(3, 1));
 
         // 1행: 로고(샵메인) 버튼
-        JPanel btLocation1 = new JPanel(new BorderLayout());
+        JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
 
-        btLocation1.add(shopLogo, BorderLayout.CENTER);
+        btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);
         
