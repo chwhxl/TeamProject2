@@ -60,7 +60,7 @@ public class WineSearchResult extends JPanel{
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		CartManage.addCart(wine, 1);
-        		JOptionPane.showMessageDialog(null, wine.getName() + "이(가) 장바구니에 추되었습니다.");
+        		JOptionPane.showMessageDialog(null, wine.getName() + "이(가) 장바구니에 추가되었습니다.");
         	}
         });
         

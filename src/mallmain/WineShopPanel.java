@@ -228,7 +228,7 @@ class WineShopPanel extends JPanel {
     }
     // 종류
     private void filterType(String type) {
-    	updateResult(Wine -> Wine.getCategory().trim().equalsIgnoreCase(type.trim()));
+    	updateResult(Wine -> Wine.getType().trim().equalsIgnoreCase(type.trim()));
     }
 
     // 검색 결과, 카테고리 선택 결과
