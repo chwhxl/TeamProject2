@@ -203,7 +203,65 @@ public class pay extends JPanel {
             JOptionPane.showMessageDialog(pay.this, "선택된 상품이 없습니다.");
             return;
         }
+      //결제창 수정
+    	JPanel inputPanel = new JPanel(new GridLayout(2, 2, 5, 5)); // 2줄 2칸 그리드
+    	JLabel nameLabel = new JLabel("이름:");
+    	JTextField nameField = new JTextField();
+    	JLabel phoneLabel = new JLabel("전화번호:");
+    	JTextField phoneField = new JTextField();
 
+    	inputPanel.add(nameLabel);
+    	inputPanel.add(nameField);
+    	inputPanel.add(phoneLabel);
+    	inputPanel.add(phoneField);
+
+    	int result1 = JOptionPane.showConfirmDialog(
+    	        pay.this, 
+    	        inputPanel, 
+    	        "결제 정보 입력", 
+    	        JOptionPane.OK_CANCEL_OPTION
+    	);
+
+    	if (result1 == JOptionPane.OK_OPTION) {
+    	    String userName = nameField.getText();
+    	    String userPhone = phoneField.getText();
+
+    	    // 입력값 검증 (비어있으면 진행 안 함)
+    	    if (userName.isEmpty() || userPhone.isEmpty()) {
+    	        JOptionPane.showMessageDialog(pay.this, "정보를 모두 입력해주세요.");
+    	        return; 
+    	    }
+
+    	    // 2. 로딩 창 띄우기 (4초)
+    	    // JOptionPane을 이용해 다이얼로그 생성 (Progress Bar 포함)
+    	    JProgressBar progressBar = new JProgressBar();
+    	    progressBar.setIndeterminate(true); // 왔다갔다 하는 로딩바
+    	    
+    	    JOptionPane loadingPane = new JOptionPane(
+    	            "결제 승인 중입니다... 잠시만 기다려주세요.", 
+    	            JOptionPane.INFORMATION_MESSAGE, 
+    	            JOptionPane.DEFAULT_OPTION, 
+    	            null, 
+    	            new Object[]{}, // 버튼 없애기
+    	            null
+    	    );
+    	    
+    	    JDialog loadingDialog = loadingPane.createDialog(pay.this, "결제 진행 중");
+    	    
+    	    // 4초 뒤에 실행할 타이머 설정
+    	    Timer timer = new Timer(4000, new ActionListener() {
+    	        @Override
+    	        public void actionPerformed(ActionEvent e) {
+    	            loadingDialog.dispose(); // 로딩 창 닫기
+    	            
+    	        }
+    	    });
+    	    
+    	    timer.setRepeats(false); // 한 번만 실행
+    	    timer.start(); // 타이머 시작
+    	    
+    	    loadingDialog.setVisible(true); // 로딩 창 보여주기 (여기서 코드 대기)
+    	}
         var wineList = WineList.getWineList();
         int tp = 0;
 
