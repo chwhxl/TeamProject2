@@ -13,9 +13,9 @@ public class Beer extends Product{
         this.country = country;
 		this.stock = 100;
 		
-		if (type.equalsIgnoreCase("Lager")) {
+		if (type.equals("Lager")) {
             this.imgPath = "data/beer/images/lager/"+ name +".png";
-        } else if (type.equalsIgnoreCase("Ale")) {
+        } else if (type.equals("Ale")) {
             this.imgPath = "data/beer/images/ale/"+ name +".png";
         } else {
             this.imgPath = "data/beer/images/nonAlc/"+ name +".png";

@@ -34,7 +34,7 @@ class BeerShopPanel extends JPanel {
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        homeButton = new JButton("홈");
+        homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
         homeButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -166,13 +166,13 @@ class BeerShopPanel extends JPanel {
 
         // 카테고리 하위 버튼 - 생산지
         JPopupMenu typeMenu = new JPopupMenu();
-        String[] types = {"RED", "WHITE", "SPARKLING"};
+        String[] types = {"Lager", "Ale", "NonAlc"};
 
         for (String type : types) {
-            JMenuItem Wine = new JMenuItem(type);
-            typeMenu.add(Wine);
+            JMenuItem Beer = new JMenuItem(type);
+            typeMenu.add(Beer);
 
-            Wine.addActionListener(e -> filterType(type));  // filterProd
+            Beer.addActionListener(e -> filterType(type));  // filterProd
         }
 
         topCate1.addMouseListener(new MouseAdapter() {
