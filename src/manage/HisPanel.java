@@ -37,10 +37,13 @@ public class HisPanel extends JPanel {
         // 3. 하단 버튼 패널
         JPanel bottomPanel = new JPanel();
         JButton btnHome = new JButton("메인으로 돌아가기");
+        JButton btnBack = new JButton("쇼핑 계속하기");
         
         btnHome.addActionListener(e -> mainFrame.showMainCard("HOME"));
+        btnBack.addActionListener(e -> mainFrame.goBack());
         
         bottomPanel.add(btnHome);
+        bottomPanel.add(btnBack);
         add(bottomPanel, BorderLayout.SOUTH);
         
         // 초기화 시 한 번 그려줌 (비어있겠지만)
