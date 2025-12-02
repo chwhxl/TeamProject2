@@ -213,6 +213,9 @@ public class CartPanel extends JPanel {
 	       timer.start();
 	       
 	       loadingDialog.setVisible(true);
+
+	       JOptionPane.showMessageDialog(this, "결제가 완료되었습니다!");
+	       mainFrame.showMainCard("HISTORY");
  	   	}
  	   	else { 
 	 	   	JOptionPane.showMessageDialog(
@@ -238,15 +241,12 @@ public class CartPanel extends JPanel {
 			}
     	}
     	if(key == 0) {
-    	for (CartProduct cp : successItems) {
-            CartManage.removeCart(cp, cp.getQuantity());
-        }
-        
-        JOptionPane.showMessageDialog(this, "결제가 완료되었습니다!");
-        
-        refreshCart(); 
-        mainFrame.showMainCard("HISTORY");
-        return 0;
+	    	for (CartProduct cp : successItems) {
+	            CartManage.removeCart(cp, cp.getQuantity());
+	        }
+	        
+	        
+	        return 0;
     	}else {
     		return 1;
     	}
@@ -258,7 +258,6 @@ public class CartPanel extends JPanel {
         for (CartProduct cp : selectedItems) {
             CartManage.removeCart(cp, cp.getQuantity());
         }
-        refreshCart();
     }
     
     private void checkAll() {
