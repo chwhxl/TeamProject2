@@ -18,7 +18,7 @@ public class HisPanel extends JPanel {
 
         // 1. 상단 타이틀 (선택사항)
         JLabel titleLabel = new JLabel("구매 내역 (영수증)", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
+        titleLabel.setFont(new Font("나눔손글씨 중학생", Font.BOLD, 40));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titleLabel, BorderLayout.NORTH);
 
@@ -26,7 +26,6 @@ public class HisPanel extends JPanel {
         hispanel = new JPanel();
         // 세로로 쭉 쌓이는 레이아웃 (BoxLayout Y_AXIS가 더 자연스러움)
         hispanel.setLayout(new BoxLayout(hispanel, BoxLayout.Y_AXIS)); 
-        
         JScrollPane scroll = new JScrollPane(hispanel,
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
