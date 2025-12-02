@@ -65,7 +65,7 @@ public class Gmailsender {
 
             sb.append("================================================\n");
             sb.append(String.format("총 결제 금액 : %,d원\n", Total));
-            sb.append("\n");
+            sb.append("\n 배송정보 확인하기: https://jumisong02.github.io/ganadi-haerongshop/ganadi_TEST.html");
             
             return sb.toString();
         
