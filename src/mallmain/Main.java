@@ -102,7 +102,6 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-    	//UIManager.put("Button.cursor", new Cursor(Cursor.HAND_CURSOR));
         SwingUtilities.invokeLater(() -> new Main());
         
     }
