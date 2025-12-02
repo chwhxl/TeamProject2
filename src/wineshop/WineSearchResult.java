@@ -46,6 +46,13 @@ public class WineSearchResult extends JPanel{
         imgLabel.setPreferredSize(new Dimension(100, 180));
         add(imgLabel, BorderLayout.NORTH);
         
+        imgLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new WineDetail(wine).setVisible(true);
+			}
+		});
+        
         JPanel infoPanel = new JPanel(new BorderLayout(0, 5));
 	    JTextPane namePane = new JTextPane();
 	
