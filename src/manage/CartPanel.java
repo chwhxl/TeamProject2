@@ -60,10 +60,20 @@ public class CartPanel extends JPanel {
         // 하단 패널
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
         totalLabel = new JLabel("선택 상품 총액: 0원");
-
+        
+   
         JButton btnPay = new JButton("선택 상품 결제");
+        Main.MyFont(btnPay);
+        btnPay.setContentAreaFilled(true);  
+        btnPay.setBackground(new Color(93,156,89));
+        
         JButton btnDelete = new JButton("선택 삭제");
+        Main.MyFont(btnDelete);
+        btnDelete.setContentAreaFilled(true);
+        btnDelete.setBackground(new Color(223,46,56));
         JButton btnBack = new JButton("쇼핑 계속하기");
+        Main.MyFont(btnBack);
+        btnBack.setBorderPainted(true);
 
         // 이벤트 연결
         btnPay.addActionListener(e -> handlePay());
@@ -186,7 +196,7 @@ public class CartPanel extends JPanel {
         										  new Object[]{},
         										  null);
         
-       JDialog loadingDialog = loadingPane.createDialog(this, "결제 진 중");
+       JDialog loadingDialog = loadingPane.createDialog(this, "결제 진행중");
        
        Timer timer = new Timer(3000, e -> {
     	   loadingDialog.dispose();

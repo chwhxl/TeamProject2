@@ -28,8 +28,7 @@ class WineShopPanel extends JPanel {
     public WineShopPanel(Main mainFrame) {
     	// 와인 데이터 로드
     	WineList.loadWineData();
-    	
-    	// 홈 버튼 연결
+    
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
         
