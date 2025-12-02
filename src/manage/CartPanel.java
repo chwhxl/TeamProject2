@@ -38,7 +38,7 @@ public class CartPanel extends JPanel {
 
         // 상단 제목
         JLabel titleLabel = new JLabel("장바구니 (Cart)", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("나눔손글씨 중학생", Font.BOLD, 40));
+        titleLabel.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         titleLabel.setBorder(new EmptyBorder(20, 0, 20, 0));
         add(titleLabel, BorderLayout.NORTH);
 

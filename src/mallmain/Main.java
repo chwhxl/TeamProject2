@@ -76,7 +76,7 @@ public class Main extends JFrame {
 	}
     
     public static void MyFont(JButton btn) {
-    	btn.setFont(new Font("Noto Sans KR", Font.BOLD, 15 ));
+    	btn.setFont(new Font("Noto Sans KR", Font.PLAIN, 13));
         btn.setFocusPainted(false);
     }
     public static Font getCustomFont(String fileName, float size) {

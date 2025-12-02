@@ -18,7 +18,7 @@ public class HisPanel extends JPanel {
 
         // 1. 상단 타이틀 (선택사항)
         JLabel titleLabel = new JLabel("구매 내역 (영수증)", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("나눔손글씨 중학생", Font.BOLD, 40));
+        titleLabel.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         titleLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
         add(titleLabel, BorderLayout.NORTH);
 
