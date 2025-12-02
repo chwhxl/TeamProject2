@@ -63,7 +63,7 @@ public class WineSearchResult extends JPanel{
 	    bottomInfo.setOpaque(false);
 	
 	    DecimalFormat df = new DecimalFormat("#,###");
-	    JLabel price = new JLabel(df.format(wine.getPrice()) + "원", JLabel.CENTER);
+	    JLabel price = new JLabel(df.format(wine.getPrice()) + "원 (재고: " + wine.getStock()+"개)" , JLabel.CENTER);
 	    JLabel alc = new JLabel(wine.getAlcohol() + "%", JLabel.CENTER);
 		
 	    bottomInfo.add(price);
