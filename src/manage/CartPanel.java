@@ -74,13 +74,18 @@ public class CartPanel extends JPanel {
         JButton btnBack = new JButton("쇼핑 계속하기");
         Main.MyFont(btnBack);
         btnBack.setBorderPainted(true);
+        JButton btnCheck = new JButton("전체 선택/해제");
+        Main.MyFont(btnCheck);
+        btnCheck.setBorderPainted(true);
 
         // 이벤트 연결
         btnPay.addActionListener(e -> handlePay());
         btnDelete.addActionListener(e -> handleDelete());
-        btnBack.addActionListener(e -> mainFrame.goBack()); 
+        btnBack.addActionListener(e -> mainFrame.goBack());
+        // btnCheck.addActionListener(e -> );
 
         bottomPanel.add(totalLabel);
+        bottomPanel.add(btnCheck);
         bottomPanel.add(btnDelete);
         bottomPanel.add(btnPay);
         bottomPanel.add(btnBack);
@@ -237,5 +242,9 @@ public class CartPanel extends JPanel {
             CartManage.removeCart(cp, cp.getQuantity());
         }
         refreshCart();
+    }
+    
+    private void checkAll() {
+    	
     }
 }
