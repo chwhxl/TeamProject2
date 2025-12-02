@@ -240,9 +240,7 @@ class WineShopPanel extends JPanel {
         // 화면 갱신
         resultPanel.revalidate();
         resultPanel.repaint();
-        SwingUtilities.invokeLater(() -> {
-        	scrollPane.getVerticalScrollBar().setValue(0);
-        });
+        Main.resetScroll(this.scrollPane);
     }
 
 
@@ -287,6 +285,7 @@ class WineShopPanel extends JPanel {
         // 화면 갱신
         resultPanel.revalidate();
         resultPanel.repaint();
+        Main.resetScroll(this.scrollPane);
     }
     
     public void refreshShop() {

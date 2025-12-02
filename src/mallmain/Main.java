@@ -52,14 +52,17 @@ public class Main extends JFrame {
     public void showMainCard(String cardName) {
     	// 화면 재고 새로고침
     	if (cardName.equals("WINE")) {
+    		this.lastCardName = cardName;
     		winePanel.refreshShop();
     	}
     	
     	if (cardName.equals("BEER")) {
+    		this.lastCardName = cardName;
 			beerPanel.refreshShop();
 		}
     	
     	if (cardName.equals("LIQUOR")) {
+    		this.lastCardName = cardName;
     		liquorPanel.refreshShop();
     	}
     	
@@ -87,6 +90,7 @@ public class Main extends JFrame {
     	btn.setFont(new Font("Noto Sans KR", Font.PLAIN, 13));
         btn.setFocusPainted(false);
     }
+    
     public static Font getCustomFont(String fileName, float size) {
         try {
             String path = "data/" + fileName; 
@@ -105,6 +109,14 @@ public class Main extends JFrame {
         }
     }
 
+    public static void resetScroll(JScrollPane scrollPane) {
+        if (scrollPane == null) return; // 안전장치
+
+        SwingUtilities.invokeLater(() -> {
+            scrollPane.getVerticalScrollBar().setValue(0);
+        });
+    }
+    
     public static void main(String[] args) {
     	FlatLightLaf.setup();
         SwingUtilities.invokeLater(() -> new Main());
