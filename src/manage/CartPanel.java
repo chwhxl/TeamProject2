@@ -162,7 +162,7 @@ public class CartPanel extends JPanel {
     }
 
     private void handlePay() {
-    	
+    	int key = 0;
         if (selectedItems.isEmpty()) {
             JOptionPane.showMessageDialog(this, "결제할 상품을 선택해주세요.");
             return;
@@ -190,31 +190,42 @@ public class CartPanel extends JPanel {
         
         int confirm = JOptionPane.showConfirmDialog(this, "선택한 상품을 결제하시겠습니까?", "결제 확인", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
-        
-        JProgressBar progressBar = new JProgressBar();
-        progressBar.setIndeterminate(true);
-        
-        JOptionPane loadingPane = new JOptionPane("결제 승인 중... 잠시만기다려주세요.",
-        										  JOptionPane.INFORMATION_MESSAGE,
-        										  JOptionPane.DEFAULT_OPTION,
-        										  null,
-        										  new Object[]{},
-        										  null);
-        
-       JDialog loadingDialog = loadingPane.createDialog(this, "결제 진행중");
-       
-       Timer timer = new Timer(3000, e -> {
-    	   loadingDialog.dispose();
-    	   processPayment();
-       });
-       
-       timer.setRepeats(false);
-       timer.start();
-       
-       loadingDialog.setVisible(true);
+
+ 	   	key = processPayment();
+ 	   	if(key == 0) {
+ 	   		JProgressBar progressBar = new JProgressBar();
+	        progressBar.setIndeterminate(true);
+	        
+	        JOptionPane loadingPane = new JOptionPane("결제 승인 중... 잠시만기다려주세요.",
+	        										  JOptionPane.INFORMATION_MESSAGE,
+	        										  JOptionPane.DEFAULT_OPTION,
+	        										  null,
+	        										  new Object[]{},
+	        										  null);
+	        
+	       JDialog loadingDialog = loadingPane.createDialog(this, "결제 진행중");
+	       
+	       Timer timer = new Timer(3000, e -> {
+	    	   loadingDialog.dispose();
+	       });
+	       
+	       timer.setRepeats(false);
+	       timer.start();
+	       
+	       loadingDialog.setVisible(true);
+ 	   	}
+ 	   	else { 
+	 	   	JOptionPane.showMessageDialog(
+	 	           this,
+	 	           "카트에 담긴 상품 수가 재고를 초과 했습니다. 다시 시도해주세요.",
+	 	           "결제 실패",
+	 	           JOptionPane.ERROR_MESSAGE
+	 	       );
+ 	   	}
     }
         		
-    private void processPayment() {
+    private int processPayment() {
+    	int key = 0;
     	List<CartProduct> successItems = new ArrayList<>();
     	
     	for (CartProduct cp : selectedItems) {
@@ -222,9 +233,11 @@ public class CartPanel extends JPanel {
     		
     		if (success) {
 				successItems.add(cp);
+			}else {
+				key++;
 			}
     	}
-    	
+    	if(key == 0) {
     	for (CartProduct cp : successItems) {
             CartManage.removeCart(cp, cp.getQuantity());
         }
@@ -233,6 +246,10 @@ public class CartPanel extends JPanel {
         
         refreshCart(); 
         mainFrame.showMainCard("HISTORY");
+        return 0;
+    	}else {
+    		return 1;
+    	}
     }
     
     private void handleDelete() {
