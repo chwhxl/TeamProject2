@@ -16,7 +16,6 @@ class WineShopPanel extends JPanel {
     private JButton homeButton;
     private JButton cartButton;
     private JButton historyButton;
-    private JButton bar;
     private JButton shopLogo = new JButton(" 가나디 포도창꼬 "); //샵 로고 나오면 이미지로 대체 가능
 
     private JButton topCate1, topCate2;
@@ -51,7 +50,7 @@ class WineShopPanel extends JPanel {
         // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
-        cartButton = new JButton("장바구니       ");
+        cartButton = new JButton(" 장바구니 ");
 		Main.MyFont(cartButton);
         cartButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -61,9 +60,6 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
         
-        bar = new JButton("|");
-		Main.MyFont(bar);
-		bar.setBounds(510, 25, 2, 15);
 
         historyButton = new JButton("구매 이력");
         Main.MyFont(historyButton);
@@ -78,7 +74,6 @@ class WineShopPanel extends JPanel {
         cartButton.addActionListener(e -> mainFrame.showMainCard("CART"));
         historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
-        cartPanel.add(bar);
         cartPanel.add(cartButton);
        
         
@@ -141,11 +136,11 @@ class WineShopPanel extends JPanel {
         categoryPanel.add(topCate1);
 
         // 버튼 위치 3행 1열
-        JPanel bigTopPanel = new JPanel(new GridLayout(3, 1));
+        JPanel bigTopPanel = new JPanel();
+        bigTopPanel.setLayout(new BoxLayout(bigTopPanel, BoxLayout.Y_AXIS));
 
         // 1행: 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
-
         btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);

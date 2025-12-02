@@ -79,7 +79,7 @@ public class Main extends JFrame {
     
     public static void MyFont(JButton btn) {
     	btn.setFont(new Font("Noto Sans KR", Font.BOLD, 15 ));
-    	btn.setBorderPainted(false);      
+    	//btn.setBorderPainted(false);      
     	btn.setContentAreaFilled(false);  
         btn.setFocusPainted(false);
     }
