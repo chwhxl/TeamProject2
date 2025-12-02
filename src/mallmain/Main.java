@@ -13,7 +13,7 @@ public class Main extends JFrame {
     
     private HomePanel homePanel;
     private WineShopPanel winePanel;
-    private WineShopPanel beerPanel;
+    private BeerShopPanel beerPanel;
     private WineShopPanel whiskeyPanel;
     
     private JPanel cartPanel; 
@@ -35,7 +35,7 @@ public class Main extends JFrame {
         // 1. 패널들을 미리 생성 -> 생성자에 'this'를 넘기는 이유는 패널들이 메인 프레임에게 화면 전환 요청하기 위함
         homePanel = new HomePanel(this);
         winePanel = new WineShopPanel(this);
-        beerPanel = new WineShopPanel(this);
+        beerPanel = new BeerShopPanel(this);
         whiskeyPanel = new WineShopPanel(this);
         cartPanel = new manage.CartPanel(this);
         hisPanel = new manage.HisPanel(this);
