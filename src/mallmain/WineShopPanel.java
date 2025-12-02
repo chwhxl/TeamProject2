@@ -16,9 +16,9 @@ class WineShopPanel extends JPanel {
     private JButton homeButton;
     private JButton cartButton;
     private JButton historyButton;
-    private JButton shopLogo = new JButton(" 가나디 포도창꼬 "); //샵 로고 나오면 이미지로 대체 가능
+    private JButton shopLogo = new JButton(" 가나디 포도창고 "); //샵 로고 나오면 이미지로 대체 가능
 
-    private JButton topCate1, topCate2;
+    private JButton topCate1;
     private JButton totalButton;
     private JPanel resultPanel;
     private JPanel mainPanel;
@@ -44,6 +44,7 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        homeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
         homePanel.add(homeButton);
         
@@ -71,6 +72,8 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        cartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        historyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartButton.addActionListener(e -> mainFrame.showMainCard("CART"));
         historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
@@ -86,7 +89,7 @@ class WineShopPanel extends JPanel {
         shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         shopLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));  // 버튼 위로 가면 커서 모양 변경
         
-        shopLogo.addActionListener(e -> mainFrame.showMainCard("HOME"));
+        shopLogo.addActionListener(e -> mainFrame.showMainCard("WINE"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -109,6 +112,7 @@ class WineShopPanel extends JPanel {
 
         itButton = new JButton("검색");
         Main.MyFont(itButton);
+        itButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         itButton.addActionListener(e -> searchName());
 
         searchPanel.add(itSearch);
@@ -130,6 +134,7 @@ class WineShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        totalButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         totalButton.addActionListener(e -> showAllWine());
 
         categoryPanel.add(totalButton);
@@ -172,6 +177,7 @@ class WineShopPanel extends JPanel {
             JMenuItem Wine = new JMenuItem(type);
             typeMenu.add(Wine);
 
+            Wine.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Wine.addActionListener(e -> filterType(type));  // filterProd
         }
 
