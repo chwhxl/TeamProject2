@@ -187,10 +187,10 @@ public class CartPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "이름과 이메일을 모두 입력해주세요.");
 			return;
 		}
-        if(emailField.getText().contains(".") &&emailField.getText().contains("@")) {
+        if(emailField.getText().contains("@") &&emailField.getText().contains(".")) {
         	
         }else {
-        	JOptionPane.showMessageDialog(this, "이메일을 올바른 형식으로 입력해주세요.");
+        	JOptionPane.showMessageDialog(this, "이메일을 올바른 형식으로 입력해주세요. 예) ganadi@wine.com");
 			return;
         }
         
