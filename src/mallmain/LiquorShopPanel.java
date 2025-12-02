@@ -170,7 +170,7 @@ class LiquorShopPanel extends JPanel {
 
         // 카테고리 하위 버튼 - 생산지
         JPopupMenu typeMenu = new JPopupMenu();
-        String[] types = {"RED", "WHITE", "SPARKLING"};
+        String[] types = {"Whisky", "Tequila", "Vodka", "Rum"};
 
         for (String type : types) {
             JMenuItem Liquor = new JMenuItem(type);
@@ -257,7 +257,7 @@ class LiquorShopPanel extends JPanel {
         resultPanel.removeAll();
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(15, 15, 15, 15);
+        gbc.insets = new Insets(20, 20, 40, 20);
         gbc.anchor = GridBagConstraints.NORTH;   // 카드 상단 고정
 
         int col = 0;
