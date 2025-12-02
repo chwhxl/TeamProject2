@@ -23,7 +23,7 @@ public class HomePanel extends JPanel{
         buttonPanel.setOpaque(false);
 
        
-        String[] shopNames = {"wine", "beer", "whiskey"};
+        String[] shopNames = {"wine", "beer", "liquor"};
         
         for (String name : shopNames) {
         	JButton shopBtn = new JButton() {
@@ -74,7 +74,7 @@ public class HomePanel extends JPanel{
                 	int x = (int)(frameWidth * 0.405) - mywidth;
                     int y = (int)(frameHeight * 0.48) - myheight;
                     shopBtn.setBounds(x,y, width, height);
-                } else if (name.equals("whiskey")) {
+                } else if (name.equals("liquor")) {
                 	int x = (int)(frameWidth * 0.55) - mywidth;
                     int y = (int)(frameHeight * 0.5) - myheight;
                     shopBtn.setBounds(x,y, width, height);
@@ -98,7 +98,7 @@ public class HomePanel extends JPanel{
 
                 if (name.equals("wine")) mainFrame.showMainCard("WINE");
                 else if (name.equals("beer")) mainFrame.showMainCard("BEER");
-                else if (name.equals("whiskey")) mainFrame.showMainCard("WHISKEY");
+                else if (name.equals("liquor")) mainFrame.showMainCard("LIQUOR");
 
             });
 
