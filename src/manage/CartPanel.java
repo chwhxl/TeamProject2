@@ -20,6 +20,8 @@ public class CartPanel extends JPanel {
     private JScrollPane scrollPane;
     private JLabel emptyLabel;
     
+    boolean isAllChecked = false;
+    
     // 장바구니에서 선택된 아이템들의 목록 (결제 대상)
     private List<CartProduct> selectedItems = new ArrayList<>();
 
@@ -82,7 +84,7 @@ public class CartPanel extends JPanel {
         btnPay.addActionListener(e -> handlePay());
         btnDelete.addActionListener(e -> handleDelete());
         btnBack.addActionListener(e -> mainFrame.goBack());
-        // btnCheck.addActionListener(e -> );
+        btnCheck.addActionListener(e -> checkAll());
 
         bottomPanel.add(totalLabel);
         bottomPanel.add(btnCheck);
@@ -268,6 +270,16 @@ public class CartPanel extends JPanel {
     }
     
     private void checkAll() {
-    	
+        boolean newState = !isAllChecked;
+
+        for (int i = 0; i < listPanel.getComponentCount(); i++) {
+            JPanel itemPanel = (JPanel) listPanel.getComponent(i);
+            JCheckBox cb = (JCheckBox) itemPanel.getComponent(0);
+
+            // 선택/해제
+            cb.setSelected(newState);
+        }
+
+        isAllChecked = newState;
     }
 }
