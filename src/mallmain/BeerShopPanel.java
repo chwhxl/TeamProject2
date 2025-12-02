@@ -285,8 +285,10 @@ class BeerShopPanel extends JPanel {
         resultPanel.repaint();
     }
     
+    public void refreshShop() {
+		showAllBeer();
+	}
     
-
     // 상세 페이지 -> 구현 필요
     private void moveToDetail(Beer beer) {  // 임시 상세 페이지 이동
         mainPanel.removeAll();

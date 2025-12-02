@@ -285,7 +285,9 @@ class WineShopPanel extends JPanel {
         resultPanel.repaint();
     }
     
-    
+    public void refreshShop() {
+		showAllWine();
+	}
 
     // 상세 페이지 
     private void moveToDetail(Wine Wine) {  

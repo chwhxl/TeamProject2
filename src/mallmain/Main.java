@@ -50,10 +50,18 @@ public class Main extends JFrame {
 
     // 화면 전환을 담당하는 메서드
     public void showMainCard(String cardName) {
-    	// 마지막으로 본 카드 이름 저장 (CART와 HISTORY는 제외)
-    	if (!cardName.equals("CART") && !cardName.equals("HISTORY")) {
-			this.lastCardName = cardName;
+    	// 화면 재고 새로고침
+    	if (cardName.equals("WINE")) {
+    		winePanel.refreshShop();
+    	}
+    	
+    	if (cardName.equals("BEER")) {
+			beerPanel.refreshShop();
 		}
+    	
+    	if (cardName.equals("LIQUOR")) {
+    		liquorPanel.refreshShop();
+    	}
     	
     	// 화면 전환 전에 해당 패널의 새로고침 메서드 호출
     	if (cardName.equals("CART")) {
