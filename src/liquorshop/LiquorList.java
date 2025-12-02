@@ -6,11 +6,11 @@ import java.nio.charset.StandardCharsets;
 
 public class LiquorList {
 
-    private static List<Liquor> beerList = new ArrayList<>();
+    private static List<Liquor> liquorList = new ArrayList<>();
     private static String filePath = "data/liquor/liquor.csv";
 
-    public static List<Liquor> getBeerList() {
-        return beerList;
+    public static List<Liquor> getLiquorList() {
+        return liquorList;
     }
     
     public static String getFilePath() {
@@ -19,7 +19,7 @@ public class LiquorList {
 
     // 리큐르 데이터 로드
     public static void loadLiquorData() {
-        if (!beerList.isEmpty()) {
+        if (!liquorList.isEmpty()) {
             System.out.println("리큐르 데이터가 이미 존재합니다.");
             return;
         }
@@ -42,7 +42,7 @@ public class LiquorList {
 
                 String[] aLine = line.split(",");
                 Liquor liquor = new Liquor(aLine[0], Integer.parseInt(aLine[1]), aLine[2], aLine[3], Double.parseDouble(aLine[4]));
-                beerList.add(liquor);
+                liquorList.add(liquor);
             }
 
         } catch (FileNotFoundException e) {

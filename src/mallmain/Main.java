@@ -14,7 +14,7 @@ public class Main extends JFrame {
     private HomePanel homePanel;
     private WineShopPanel winePanel;
     private BeerShopPanel beerPanel;
-    private WineShopPanel whiskeyPanel;
+    private LiquorShopPanel whiskeyPanel;
     
     private JPanel cartPanel; 
     private JPanel hisPanel;
@@ -36,7 +36,7 @@ public class Main extends JFrame {
         homePanel = new HomePanel(this);
         winePanel = new WineShopPanel(this);
         beerPanel = new BeerShopPanel(this);
-        whiskeyPanel = new WineShopPanel(this);
+        whiskeyPanel = new LiquorShopPanel(this);
         cartPanel = new manage.CartPanel(this);
         hisPanel = new manage.HisPanel(this);
         

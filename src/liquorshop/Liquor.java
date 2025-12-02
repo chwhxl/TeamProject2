@@ -13,14 +13,14 @@ public class Liquor extends Product {
 		this.country = country;
 		this.stock = 20;
 		
-		if (type.equals("whiskey")) {
-            this.imgPath = "data/liqour/images/whisky/"+ name +".png";
-        } else if (type.equals("vodka")) {
-            this.imgPath = "data/liqour/images/vodka/"+ name +".png";
-        } else if (type.equals("tequila")) {
-            this.imgPath = "data/liqour/images/tequila/"+ name +".png";
+		if (type.equalsIgnoreCase("whisky")) {
+            this.imgPath = "data/liquor/images/whisky/"+ name +".png";
+        } else if (type.equalsIgnoreCase("vodka")) {
+            this.imgPath = "data/liquor/images/vodka/"+ name +".png";
+        } else if (type.equalsIgnoreCase("tequila")) {
+            this.imgPath = "data/liquor/images/tequila/"+ name +".png";
         } else {
-			this.imgPath = "data/liqour/images/rum/"+ name +".png";
+			this.imgPath = "data/liquor/images/rum/"+ name +".png";
 		}
 	}
 	
