@@ -52,14 +52,17 @@ public class Main extends JFrame {
     public void showMainCard(String cardName) {
     	// 화면 재고 새로고침
     	if (cardName.equals("WINE")) {
+    		this.lastCardName = cardName;
     		winePanel.refreshShop();
     	}
     	
     	if (cardName.equals("BEER")) {
+    		this.lastCardName = cardName;
 			beerPanel.refreshShop();
 		}
     	
     	if (cardName.equals("LIQUOR")) {
+    		this.lastCardName = cardName;
     		liquorPanel.refreshShop();
     	}
     	
