@@ -6,6 +6,8 @@ import wineshop.WineSearchResult;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.*;
 
 class WineShopPanel extends JPanel {
@@ -15,7 +17,7 @@ class WineShopPanel extends JPanel {
     private JButton cartButton;
     private JButton historyButton;
     private JButton bar;
-    private JButton shopLogo = new JButton("> 가나디 포도밭 <"); //샵 로고 나오면 이미지로 대체 가능
+    private JButton shopLogo = new JButton(" 가나디 포도창꼬 "); //샵 로고 나오면 이미지로 대체 가능
 
     private JButton topCate1, topCate2;
     private JButton totalButton;
@@ -80,14 +82,14 @@ class WineShopPanel extends JPanel {
         cartPanel.add(bar);
         cartPanel.add(cartButton);
        
-
+        
         // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
         shopLogo.setBorderPainted(false);   // 외곽선 제거 원하면 false로 변경
         shopLogo.setContentAreaFilled(false); // 배경 채움 제거
         shopLogo.setMargin(new Insets(0, 0, 0, 0)); // 여백 제거
 
 
-        shopLogo.setFont(new Font("나눔손글씨 중학생", Font.BOLD, 40));
+        shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         shopLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));  // 버튼 위로 가면 커서 모양 변경
         
         shopLogo.addActionListener(e -> mainFrame.showMainCard("HOME"));
@@ -282,6 +284,8 @@ class WineShopPanel extends JPanel {
         resultPanel.revalidate();
         resultPanel.repaint();
     }
+    
+    
 
     // 상세 페이지 -> 구현 필요
     private void moveToDetail(Wine Wine) {  // 임시 상세 페이지 이동

@@ -3,6 +3,7 @@ package mallmain;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class Main extends JFrame {
 	
@@ -76,11 +77,28 @@ public class Main extends JFrame {
 		showMainCard(this.lastCardName);
 	}
     
-    static void MyFont(JButton btn) {
+    public static void MyFont(JButton btn) {
     	btn.setFont(new Font("Noto Sans KR", Font.BOLD, 15 ));
     	btn.setBorderPainted(false);      
     	btn.setContentAreaFilled(false);  
         btn.setFocusPainted(false);
+    }
+    public static Font getCustomFont(String fileName, float size) {
+        try {
+            String path = "data/" + fileName; 
+            File fontFile = new File(path);
+            
+            //새로운 폰트 생성
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
+            
+            // 크기 조절해서 반환
+            return customFont.deriveFont(size);
+            
+        } catch (Exception e) {
+            // 에러 나면 그냥 기본 폰트 반환해서 프로그램 안 꺼지게 함
+            System.err.println("폰트 로드 실패: " + fileName);
+            return new Font("Noto Sans KR", Font.BOLD, (int)size);
+        }
     }
 
     public static void main(String[] args) {

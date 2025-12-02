@@ -1,6 +1,9 @@
 package wineshop;
 
 import javax.swing.*;
+
+import mallmain.Main;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.text.*;
@@ -55,6 +58,9 @@ public class WineSearchResult extends JPanel{
         add(infoPanel, BorderLayout.CENTER);
         
         JButton cartBtn = new JButton("장바구니에 추가");
+        cartBtn.setFont(new Font("Noto Sans KR", Font.BOLD, 15 ));      
+        cartBtn.setContentAreaFilled(false);  
+        cartBtn.setFocusPainted(false);
         cartBtn.setPreferredSize(new Dimension(180, 30));// 높이 고정
         cartBtn.addActionListener(new ActionListener() {
         	@Override
