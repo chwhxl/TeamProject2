@@ -34,7 +34,7 @@ class WineShopPanel extends JPanel {
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        homeButton = new JButton("홈");
+        homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
         homeButton.addFocusListener(new FocusAdapter() {
             @Override
