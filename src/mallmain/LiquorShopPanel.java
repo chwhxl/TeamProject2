@@ -18,7 +18,7 @@ class LiquorShopPanel extends JPanel {
     private JButton historyButton;
     private JButton shopLogo = new JButton(" 가나디 위스키창고 "); //샵 로고 나오면 이미지로 대체 가능
 
-    private JButton topCate1, topCate2;
+    private JButton topCate1;
     private JButton totalButton;
     private JPanel resultPanel;
     private JPanel mainPanel;
@@ -34,7 +34,7 @@ class LiquorShopPanel extends JPanel {
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        homeButton = new JButton("홈");
+        homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
         homeButton.addFocusListener(new FocusAdapter() {
             @Override
@@ -44,6 +44,7 @@ class LiquorShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        homeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
         homePanel.add(homeButton);
         
@@ -71,6 +72,8 @@ class LiquorShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        cartButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        historyButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartButton.addActionListener(e -> mainFrame.showMainCard("CART"));
         historyButton.addActionListener(e -> mainFrame.showMainCard("HISTORY"));
         cartPanel.add(historyButton);
@@ -86,7 +89,7 @@ class LiquorShopPanel extends JPanel {
         shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         shopLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));  // 버튼 위로 가면 커서 모양 변경
         
-        shopLogo.addActionListener(e -> mainFrame.showMainCard("HOME"));
+        shopLogo.addActionListener(e -> mainFrame.showMainCard("LIQUOR"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -130,6 +133,7 @@ class LiquorShopPanel extends JPanel {
             public void focusLost(FocusEvent e) {}
         });
 
+        totalButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         totalButton.addActionListener(e -> showAllLiquor());
 
         categoryPanel.add(totalButton);
@@ -172,6 +176,7 @@ class LiquorShopPanel extends JPanel {
             JMenuItem Liquor = new JMenuItem(type);
             typeMenu.add(Liquor);
 
+            Liquor.setCursor(new Cursor(Cursor.HAND_CURSOR));
             Liquor.addActionListener(e -> filterType(type));  // filterProd
         }
 

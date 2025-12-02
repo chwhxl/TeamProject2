@@ -14,7 +14,7 @@ public class Main extends JFrame {
     private HomePanel homePanel;
     private WineShopPanel winePanel;
     private BeerShopPanel beerPanel;
-    private LiquorShopPanel whiskeyPanel;
+    private LiquorShopPanel liquorPanel;
     
     private JPanel cartPanel; 
     private JPanel hisPanel;
@@ -33,7 +33,7 @@ public class Main extends JFrame {
         homePanel = new HomePanel(this);
         winePanel = new WineShopPanel(this);
         beerPanel = new BeerShopPanel(this);
-        whiskeyPanel = new LiquorShopPanel(this);
+        liquorPanel = new LiquorShopPanel(this);
         cartPanel = new manage.CartPanel(this);
         hisPanel = new manage.HisPanel(this);
         
@@ -41,7 +41,7 @@ public class Main extends JFrame {
         mainContainer.add(homePanel, "HOME");
         mainContainer.add(winePanel, "WINE");
         mainContainer.add(beerPanel, "BEER");
-        mainContainer.add(whiskeyPanel, "WHISKEY");
+        mainContainer.add(liquorPanel, "LIQUOR");
         mainContainer.add(cartPanel,"CART"); 
         mainContainer.add(hisPanel,"HISTORY");
         add(mainContainer);
