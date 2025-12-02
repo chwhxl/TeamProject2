@@ -8,7 +8,7 @@ import javax.mail.internet.*;
 public class Gmailsender {
 	
 		static void SendGmail(String customer_email, String customer_name) {
-        String host = "stmp.gmail.com";
+        String host = "smtp.gmail.com";
         final String user = "ganadi.haerong@gmail.com";
         final String password = "sdnhzikyowrhxvzf"; // 공백 없이 입력
 
@@ -33,7 +33,7 @@ public class Gmailsender {
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("["+customer_name+ "님] 가나디 헤롱샵 구매 내역"); 
-            StringBuilder sb = new StringBuilder();
+
             message.setText(emailContent());
 
             // 5. 전송
@@ -53,9 +53,8 @@ public class Gmailsender {
             StringBuilder sb = new StringBuilder();
             int Total = 0;
 
-            sb.append("가나디 헤롱샵을 이용해주셔서 감사합니다 🎀 \n");
+            sb.append("가나디 헤롱샵을 이용해주셔서 감사합니다 🎀 \n\n");
             sb.append("주문 정보 : \n");
-            sb.append("_______________________________\n");
 
             for (HistoryProduct hp : list) {
                 int sum = hp.getPrice() * hp.getQuantity();
@@ -64,7 +63,7 @@ public class Gmailsender {
                           hp.getName(), hp.getPrice(), hp.getQuantity(), sum));
             }
 
-            sb.append("===============================\n");
+            sb.append("================================================\n");
             sb.append(String.format("총 결제 금액 : %,d원\n", Total));
             sb.append("\n");
             
