@@ -170,12 +170,12 @@ public class CartPanel extends JPanel {
         
         JPanel inputPanel = new JPanel(new GridLayout(2, 2, 5, 5));
         JTextField nameField = new JTextField();
-        JTextField phoneField = new JTextField();
+        JTextField emailField = new JTextField();
         
         inputPanel.add(new JLabel("이름:"));
         inputPanel.add(nameField);
-        inputPanel.add(new JLabel("전화번호:"));
-        inputPanel.add(phoneField);
+        inputPanel.add(new JLabel("이메일:"));
+        inputPanel.add(emailField);
         
         int result = JOptionPane.showConfirmDialog(this, inputPanel, "결제 정보 입력", JOptionPane.OK_CANCEL_OPTION);
         
@@ -183,10 +183,16 @@ public class CartPanel extends JPanel {
 			return; 
 		}
         
-        if (nameField.getText().trim().isEmpty() || phoneField.getText().trim().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "이름과 전화번호를 모두 입력해주세요.");
+        if (nameField.getText().trim().isEmpty() || emailField.getText().trim().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "이름과 이메일을 모두 입력해주세요.");
 			return;
 		}
+        if(emailField.getText().contains(".") &&emailField.getText().contains("@")) {
+        	
+        }else {
+        	JOptionPane.showMessageDialog(this, "이메일을 올바른 형식으로 입력해주세요.");
+			return;
+        }
         
         int confirm = JOptionPane.showConfirmDialog(this, "선택한 상품을 결제하시겠습니까?", "결제 확인", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
