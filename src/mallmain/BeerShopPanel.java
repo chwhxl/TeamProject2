@@ -23,6 +23,7 @@ class BeerShopPanel extends JPanel {
     private JPanel resultPanel;
     private JPanel mainPanel;
     private Main mainFrame;
+    private JScrollPane scrollPane;
 	
     public BeerShopPanel(Main mainFrame) {
     	// 맥주 데이터 로드
@@ -201,7 +202,7 @@ class BeerShopPanel extends JPanel {
 
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
-        JScrollPane scrollPane = new JScrollPane(resultPanel);
+        this.scrollPane = new JScrollPane(resultPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
         showAllBeer();
@@ -239,6 +240,9 @@ class BeerShopPanel extends JPanel {
         // 화면 갱신
         resultPanel.revalidate();
         resultPanel.repaint();
+        SwingUtilities.invokeLater(() -> {
+        	scrollPane.getVerticalScrollBar().setValue(0);
+        });
     }
 
 

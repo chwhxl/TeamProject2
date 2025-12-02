@@ -80,6 +80,21 @@ public class LiquorSearchResult extends JPanel{
         cartBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		
+        		int currentInCart = 0;
+        		
+        		for (manage.CartProduct cp : CartManage.getCartList()) {
+        			if (cp.getProduct().getName().equals(liquor.getName())) {
+        				currentInCart += cp.getQuantity();
+        				break;
+        			}
+        		}
+        		
+        		if (currentInCart + 1 > liquor.getStock()) {
+        	        JOptionPane.showMessageDialog(null, "재고가 부족합니다. (남은 재고: " + liquor.getStock() + "개)", "알림", JOptionPane.WARNING_MESSAGE);
+        	        return;
+        	    }
+        		
         		CartManage.addCart(liquor, 1);
         		JOptionPane.showMessageDialog(null, liquor.getName() + "이(가) 장바구니에 추가되었습니다.");
         	}
