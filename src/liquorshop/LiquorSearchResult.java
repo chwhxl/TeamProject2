@@ -1,6 +1,9 @@
 package liquorshop;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import mallmain.Main;
 
@@ -10,19 +13,19 @@ import java.text.*;
 import manage.CartManage;
 
 public class LiquorSearchResult extends JPanel{
-	private Liquor Liquor;
+	private Liquor liquor;
 
-    public LiquorSearchResult(Liquor Liquor) {
-        this.Liquor = Liquor;
+    public LiquorSearchResult(Liquor liquor) {
+        this.liquor = liquor;
 
         // 카드 디자인
-        setPreferredSize(new Dimension(180, 280));
+        setPreferredSize(new Dimension(180, 296));
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
         setLayout(new BorderLayout());
 
         // 상품 이미지 
         JLabel imgLabel;
-        String imgPath = Liquor.getImgPath();
+        String imgPath = liquor.getImgPath();
         
         if (imgPath != null && !imgPath.isEmpty()) {
             ImageIcon icon = new ImageIcon(imgPath);
@@ -43,19 +46,32 @@ public class LiquorSearchResult extends JPanel{
         imgLabel.setPreferredSize(new Dimension(100, 180));
         add(imgLabel, BorderLayout.NORTH);
         
-        // 상품명 / 가격 / 도수
-        JPanel infoPanel = new JPanel(new GridLayout(3, 1));
-        JLabel name = new JLabel(Liquor.getName(), JLabel.CENTER);
-        DecimalFormat df = new DecimalFormat("#,###");
-        String formattedPrice = df.format(Liquor.getPrice());
-        JLabel price = new JLabel(formattedPrice + "원", JLabel.CENTER);
-        JLabel alc = new JLabel(Liquor.getAlcohol() + "%", JLabel.CENTER);
-        
-        infoPanel.add(name);
-        infoPanel.add(price);
-        infoPanel.add(alc);
-        
-        add(infoPanel, BorderLayout.CENTER);
+        JPanel infoPanel = new JPanel(new BorderLayout(0, 5));
+	    JTextPane namePane = new JTextPane();
+	
+	    namePane.setText(liquor.getName());
+	    StyledDocument doc = namePane.getStyledDocument();
+	    SimpleAttributeSet center = new SimpleAttributeSet();
+	    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+	    doc.setParagraphAttributes(0, doc.getLength(), center, false);
+	
+	    namePane.setEditable(false);
+	    namePane.setOpaque(false); // 배경 투명하게
+	    namePane.setBorder(null); // 테두리 없애기
+	    namePane.setFont(new Font("Noto Sans KR", Font.BOLD, 15)); // 폰트 설정
+	    JPanel bottomInfo = new JPanel(new GridLayout(2, 1));
+	    bottomInfo.setOpaque(false);
+	
+	    DecimalFormat df = new DecimalFormat("#,###");
+	    JLabel price = new JLabel(df.format(liquor.getPrice()) + "원 (재고: " + liquor.getStock()+"개)" , JLabel.CENTER);
+	    JLabel alc = new JLabel(liquor.getAlcohol() + "%", JLabel.CENTER);
+		
+	    bottomInfo.add(price);
+        bottomInfo.add(alc);
+
+        infoPanel.add(namePane, BorderLayout.CENTER);	
+	    infoPanel.add(bottomInfo, BorderLayout.SOUTH);
+	    add(infoPanel, BorderLayout.CENTER);
         
         JButton cartBtn = new JButton("장바구니에 추가");
         cartBtn.setFont(new Font("Noto Sans KR", Font.BOLD, 15));        
@@ -64,8 +80,8 @@ public class LiquorSearchResult extends JPanel{
         cartBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		CartManage.addCart(Liquor, 1);
-        		JOptionPane.showMessageDialog(null, Liquor.getName() + "이(가) 장바구니에 추가되었습니다.");
+        		CartManage.addCart(liquor, 1);
+        		JOptionPane.showMessageDialog(null, liquor.getName() + "이(가) 장바구니에 추가되었습니다.");
         	}
         });
         
@@ -73,6 +89,6 @@ public class LiquorSearchResult extends JPanel{
     }
 
     public Liquor getItem() {
-        return Liquor;
+        return liquor;
     }
 }

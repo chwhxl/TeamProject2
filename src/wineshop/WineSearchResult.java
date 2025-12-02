@@ -19,7 +19,7 @@ public class WineSearchResult extends JPanel{
         this.wine = wine;
 
         // 카드 디자인
-        setPreferredSize(new Dimension(180, 290));
+        setPreferredSize(new Dimension(180, 296));
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
         setLayout(new BorderLayout());
 
@@ -58,7 +58,7 @@ public class WineSearchResult extends JPanel{
 	    namePane.setEditable(false);
 	    namePane.setOpaque(false); // 배경 투명하게
 	    namePane.setBorder(null); // 테두리 없애기
-	    namePane.setFont(new Font("맑은 고딕", Font.BOLD, 14)); // 폰트 설정
+	    namePane.setFont(new Font("Noto Sans KR", Font.BOLD, 15)); // 폰트 설정
 	    JPanel bottomInfo = new JPanel(new GridLayout(2, 1));
 	    bottomInfo.setOpaque(false);
 	
