@@ -78,9 +78,9 @@ class WineShopPanel extends JPanel {
        
         
         // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
-        shopLogo.setBorderPainted(false);   // 외곽선 제거 원하면 false로 변경
-        shopLogo.setContentAreaFilled(false); // 배경 채움 제거
-        shopLogo.setMargin(new Insets(0, 0, 0, 0)); // 여백 제거
+        shopLogo.setBorderPainted(false);  
+        shopLogo.setContentAreaFilled(false); 
+        shopLogo.setMargin(new Insets(0, 0, 0, 0));
 
 
         shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
@@ -93,14 +93,14 @@ class WineShopPanel extends JPanel {
         itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
             @Override
-            public void focusGained(FocusEvent e) {  // FocusListener 인터페이스
+            public void focusGained(FocusEvent e) {  
                 if (itSearch.getText().equals("검색어를 입력하세요.")) {
                     itSearch.setText("");
                 }
             }
 
             @Override
-            public void focusLost(FocusEvent e) {  // FocusListener 인터페이스
+            public void focusLost(FocusEvent e) {  
                 if (itSearch.getText().isBlank()) {
                     itSearch.setText("검색어를 입력하세요.");
                 }
@@ -135,17 +135,17 @@ class WineShopPanel extends JPanel {
         categoryPanel.add(totalButton);
         categoryPanel.add(topCate1);
 
-        // 버튼 위치 3행 1열
+        // 버튼 3 X 1 배열
         JPanel bigTopPanel = new JPanel();
         bigTopPanel.setLayout(new BoxLayout(bigTopPanel, BoxLayout.Y_AXIS));
 
-        // 1행: 로고(샵메인) 버튼
+        // 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
         btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);
         
-        // 2행: 홈, 장바구니 버튼
+        // 홈, 장바구니 버튼
         JPanel btLocation2 = new JPanel(new BorderLayout());
         
         btLocation2.add(homePanel, BorderLayout.WEST);
@@ -153,7 +153,7 @@ class WineShopPanel extends JPanel {
         
         bigTopPanel.add(btLocation2);
 
-        // 3행: 카테고리, 상품 버튼
+        // 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
         
         btLocation3.add(categoryPanel, BorderLayout.WEST);
@@ -281,8 +281,8 @@ class WineShopPanel extends JPanel {
     
     
 
-    // 상세 페이지 -> 구현 필요
-    private void moveToDetail(Wine Wine) {  // 임시 상세 페이지 이동
+    // 상세 페이지 
+    private void moveToDetail(Wine Wine) {  
         mainPanel.removeAll();
         // mainPanel.add(new DetailPanel(Wine));
         mainPanel.revalidate();
