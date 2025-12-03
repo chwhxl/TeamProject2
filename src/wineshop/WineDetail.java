@@ -26,8 +26,8 @@ public class WineDetail extends JFrame {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
 
-        // --- 왼쪽 패널: 와인 이미지 (비율 유지) ---
-        JPanel leftPanel = new JPanel(new GridBagLayout()); // 중앙 정렬을 위해 GridBagLayout 사용
+        // 왼쪽 와인 이미지
+        JPanel leftPanel = new JPanel(new GridBagLayout()); 
         leftPanel.setBackground(Color.WHITE);
         leftPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         leftPanel.setPreferredSize(new Dimension(300, 0)); 
@@ -38,7 +38,6 @@ public class WineDetail extends JFrame {
         if (imgPath != null && !imgPath.isEmpty()) {
             ImageIcon icon = new ImageIcon(imgPath);
             if (icon.getIconWidth() > 0) {
-                // [수정] 세로 높이 350에 맞추고 가로 비율 자동 조절 (-1)
                 Image scaled = icon.getImage().getScaledInstance(-1, 350, Image.SCALE_SMOOTH);
                 imgLabel.setIcon(new ImageIcon(scaled));
             } else {
@@ -48,21 +47,19 @@ public class WineDetail extends JFrame {
             imgLabel.setText("No Image");
         }
         
-        imgLabel.setHorizontalAlignment(JLabel.CENTER);
-        // 깔끔한 느낌을 위해 이미지 테두리는 제거하거나 아주 연하게
-        // imgLabel.setBorder(BorderFactory.createLineBorder(new Color(240, 240, 240))); 
+        imgLabel.setHorizontalAlignment(JLabel.CENTER); 
         
         leftPanel.add(imgLabel);
         add(leftPanel, BorderLayout.WEST);
 
 
-        // --- 오른쪽 패널: 상세 정보 & 장바구니 ---
+        // 오른쪽 상세 정보, 장바구니
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setBackground(Color.WHITE);
-        rightPanel.setBorder(new EmptyBorder(40, 20, 40, 40)); // 여백 조정
+        rightPanel.setBorder(new EmptyBorder(40, 20, 40, 40)); 
 
-        // 1. 와이너리
+        // 와이너리 정보
         JLabel wineryLabel = new JLabel(wine.getWinery());
         wineryLabel.setFont(new Font("Noto Sans KR", Font.PLAIN, 16));
         wineryLabel.setForeground(Color.GRAY);
@@ -70,15 +67,15 @@ public class WineDetail extends JFrame {
         rightPanel.add(wineryLabel);
         rightPanel.add(Box.createVerticalStrut(8));
 
-        // 2. [수정] 와인 이름 (JTextArea 대신 JLabel + HTML 사용 -> 커서 제거됨)
+        // 와인 이름
         String htmlTitle = "<html><body style='width: 300px'>" + wine.getName() + " " + wine.getYear() + "</body></html>";
         JLabel nameLabel = new JLabel(htmlTitle);
-        nameLabel.setFont(new Font("Noto Sans KR", Font.BOLD, 26)); // 폰트 키움
+        nameLabel.setFont(new Font("Noto Sans KR", Font.BOLD, 26)); 
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         rightPanel.add(nameLabel);
         rightPanel.add(Box.createVerticalStrut(25));
 
-        // 3. 상세 스펙
+        // 스펙 패널
         JPanel specPanel = new JPanel(new GridBagLayout());
         specPanel.setBackground(Color.WHITE);
         specPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -95,15 +92,15 @@ public class WineDetail extends JFrame {
         rightPanel.add(specPanel);
         rightPanel.add(Box.createVerticalGlue()); // 남은 공간 밀어내기
 
-        // 4. 가격 및 장바구니 박스
+        // 가격 및 장바구니 추가 버튼
         JPanel cartBox = new JPanel(new GridLayout(2, 1, 0, 5));
         cartBox.setBackground(new Color(248, 248, 248)); 
         cartBox.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(230, 230, 230)),
-                new EmptyBorder(15, 20, 15, 20) // 안쪽 여백 넉넉하게
+                new EmptyBorder(15, 20, 15, 20) 
         ));
         cartBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        cartBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 140)); // 박스 크기
+        cartBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 140)); 
         
         // 가격
         JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -116,11 +113,11 @@ public class WineDetail extends JFrame {
         
         cartBox.add(pricePanel);
         
-        // 수량 조절 및 버튼 패널 (오른쪽 정렬)
+        // 수량 조절 및 버튼 패널
         JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 5));
         actionPanel.setOpaque(false);
 
-        // 수량 조절 버튼 디자인 개선
+        // 수량 조절 버튼
         JButton btnMinus = createRoundButton("-");
         quantityLabel = new JLabel("1", SwingConstants.CENTER);
         quantityLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -130,7 +127,7 @@ public class WineDetail extends JFrame {
         // 장바구니 버튼
         JButton btnCart = new JButton(" Add to Cart ");
         btnCart.setFont(new Font("SansSerif", Font.BOLD, 14));
-        btnCart.setBackground(new Color(30, 30, 30)); // 진한 검정
+        btnCart.setBackground(new Color(30, 30, 30));
         btnCart.setForeground(Color.WHITE);
         btnCart.setFocusPainted(false);
         btnCart.setBorderPainted(false);
@@ -169,7 +166,7 @@ public class WineDetail extends JFrame {
         add(rightPanel, BorderLayout.CENTER);
     }
 
-    // [헬퍼] 둥근 버튼 생성
+    // 수량 +/- 버튼 모양
     private JButton createRoundButton(String text) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("SansSerif", Font.BOLD, 16));
@@ -181,7 +178,6 @@ public class WineDetail extends JFrame {
         return btn;
     }
 
-    // [헬퍼] 스펙 한 줄 추가
     private void addSpecRow(JPanel panel, GridBagConstraints gbc, int row, String title, String value) {
         gbc.gridy = row;
         
@@ -194,7 +190,6 @@ public class WineDetail extends JFrame {
 
         gbc.gridx = 1;
         gbc.weightx = 0.85;
-        // 내용이 너무 길면 자르거나 툴팁 추가
         JLabel vLabel = new JLabel(value);
         vLabel.setFont(new Font("Noto Sans KR", Font.PLAIN, 14));
         panel.add(vLabel, gbc);

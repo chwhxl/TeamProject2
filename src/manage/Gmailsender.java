@@ -28,7 +28,7 @@ public class Gmailsender {
         });
 
         try {
-            // 4. 이메일 메시지 작성
+            // 이메일 내용 작성
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -36,7 +36,7 @@ public class Gmailsender {
 
             message.setText(emailContent());
 
-            // 5. 전송
+            // 전송
             Transport.send(message);
             System.out.println("성공! 이메일을 보냈습니다.");
 
@@ -45,11 +45,11 @@ public class Gmailsender {
             System.out.println("실패: " + e.getMessage());
         	}
 		}
+		
+		//이메일 본문 내용 정리
         public static String emailContent() {
             List<HistoryProduct> list = HistoryManage.getHistoryList();
-            
-
-
+      
             StringBuilder sb = new StringBuilder();
             int Total = 0;
 
