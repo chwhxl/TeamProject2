@@ -199,7 +199,8 @@ public class CartPanel extends JPanel {
         int confirm = JOptionPane.showConfirmDialog(this, "선택한 상품을 결제하시겠습니까?", "결제 확인", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
 
- 	   	key = processPayment();
+        String user = nameField.getText().trim();
+ 	   	key = processPayment(user);
  	   	if(key == 0) {
  	   		JProgressBar progressBar = new JProgressBar();
 	        progressBar.setIndeterminate(true);
@@ -235,12 +236,12 @@ public class CartPanel extends JPanel {
  	   	}
     }
         		
-    private int processPayment() {
+    private int processPayment(String user) {
     	int key = 0;
     	List<CartProduct> successItems = new ArrayList<>();
     	
     	for (CartProduct cp : selectedItems) {
-    		boolean success = Payment.payOneProduct(cp);
+    		boolean success = Payment.payOneProduct(cp, user);
     		
     		if (success) {
 				successItems.add(cp);

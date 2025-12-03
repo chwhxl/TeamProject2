@@ -8,7 +8,7 @@ public class HistoryManage {
     private static List<HistoryProduct> historyList = new ArrayList<>();
 
     // 히스토리 추가 (이미 있으면 수량만 증가, 없으면 추가)
-    public static void addHistory(String name, int price, int quantity) {
+    public static void addHistory(String user, String name, int price, int quantity) {
     	
         boolean found = false;
         
@@ -21,7 +21,7 @@ public class HistoryManage {
         }
         
         if (!found) {
-            historyList.add(new HistoryProduct(name, price, quantity));
+            historyList.add(new HistoryProduct(user, name, price, quantity));
         }
     }
     

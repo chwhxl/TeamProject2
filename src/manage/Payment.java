@@ -5,7 +5,7 @@ import wineshop.*;
 
 public class Payment {
 	
-    public static boolean payOneProduct(CartProduct cartProduct) {
+    public static boolean payOneProduct(CartProduct cartProduct, String user) {
     	
 		Product product = cartProduct.getProduct();	
 		int buyQuantity = cartProduct.getQuantity();
@@ -16,7 +16,7 @@ public class Payment {
 		} 
 			
     	product.setStock(product.getStock() - buyQuantity);
-    	HistoryManage.addHistory(product.getName(), product.getPrice(), buyQuantity);
+    	HistoryManage.addHistory(user, product.getName(), product.getPrice(), buyQuantity);
     	return true;
     }
 }

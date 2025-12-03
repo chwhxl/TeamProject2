@@ -75,24 +75,43 @@ public class HisPanel extends JPanel {
 
     // 아이템 하나를 만드는 메서드
     private JPanel createItemPanel(HistoryProduct product) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY)); // 밑줄
-        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80)); // 가로로 꽉 차게
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 80));
         panel.setBackground(Color.WHITE);
 
-        // 1. 상품명
-        JLabel nameLabel = new JLabel(product.getName());
-        nameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
-        nameLabel.setPreferredSize(new Dimension(200, 50));
-        
-        // 2. 수량 & 가격 정보
-        String infoText = String.format("%d개 | %,d원", product.getQuantity(), product.getProductTotalPrice());
-        JLabel infoLabel = new JLabel(infoText);
-        infoLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+        // 1. 주문자 이름 (맨 왼쪽)
+        JLabel buyerLabel = new JLabel(product.getUser());
+        buyerLabel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+        buyerLabel.setPreferredSize(new Dimension(120, 40));
 
+        // 2. 구매 상품
+        JLabel nameLabel = new JLabel(product.getName());
+        nameLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+        nameLabel.setPreferredSize(new Dimension(200, 40));
+
+        // 3. 수량 & 구매 가격
+        String midText = String.format("%d개 | %,d원", 
+                product.getQuantity(), product.getPrice());
+        JLabel midLabel = new JLabel(midText);
+        midLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+        midLabel.setPreferredSize(new Dimension(150, 40));
+
+        // 4. 총 가격 (맨 오른쪽, 중앙 정렬)
+        JLabel totalLabel = new JLabel(String.format("= %,d원", product.getProductTotalPrice()));
+        totalLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+        totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        totalLabel.setPreferredSize(new Dimension(150, 40));
+
+        // 배치
+        panel.add(buyerLabel);
         panel.add(nameLabel);
-        panel.add(infoLabel);
+        panel.add(midLabel);
+        panel.add(Box.createHorizontalGlue()); // 오른쪽 밀어내기
+        panel.add(totalLabel);
 
         return panel;
     }
+
 }
