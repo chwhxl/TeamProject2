@@ -44,7 +44,7 @@ public class HisPanel extends JPanel {
 
         add(northPanel, BorderLayout.NORTH);
 
-        // 3. 중앙 리스트 (스크롤)
+        // 3. 리스트
         hispanel = new JPanel();
         hispanel.setLayout(new BoxLayout(hispanel, BoxLayout.Y_AXIS));
 
@@ -56,7 +56,7 @@ public class HisPanel extends JPanel {
 
         add(scroll, BorderLayout.CENTER);
 
-        // 4. 하단 총 금액 + 버튼 영역
+        // 4. 버튼 영역
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
         southPanel.setBorder(new EmptyBorder(10, 0, 20, 0));
@@ -98,7 +98,7 @@ public class HisPanel extends JPanel {
             return;
         }
 
-        // 1. 사용자 이름 기준으로 그룹화
+        // 1. 사용자 이름 기준으로 그룹
         HashMap<String, ArrayList<HistoryProduct>> grouped = new HashMap<>();
 
         for (HistoryProduct item : list) {
@@ -129,7 +129,7 @@ public class HisPanel extends JPanel {
                 sum += hp.getProductTotalPrice();
             }
 
-            // 사용자별 총합
+            // 사용자별 가격
             JLabel totalLabel = new JLabel(String.format("총 금액: %,d원", sum), SwingConstants.RIGHT);
             totalLabel.setFont(new Font("맑은 고딕", Font.BOLD, 18));
             totalLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
@@ -148,7 +148,7 @@ public class HisPanel extends JPanel {
         JPanel panel = new JPanel(new GridLayout(1, 4));
         panel.setBackground(Color.WHITE);
 
-        // 줄 높이를 강제로 40px로 고정 (≈ 40px)
+        // 줄 높이 40px 고정
         panel.setPreferredSize(new Dimension(0, 40));
         panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panel.setMinimumSize(new Dimension(0, 40));
