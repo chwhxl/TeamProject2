@@ -187,9 +187,7 @@ public class CartPanel extends JPanel {
 			JOptionPane.showMessageDialog(this, "이름과 이메일을 모두 입력해주세요.");
 			return;
 		}
-        if(emailField.getText().contains("@") &&emailField.getText().contains(".")) {
-        	
-        }else {
+        if(!emailField.getText().contains("@") &&emailField.getText().contains(".")) {
         	JOptionPane.showMessageDialog(this, "이메일을 올바른 형식으로 입력해주세요. 예) ganadi@wine.com");
 			return;
         }
@@ -222,6 +220,7 @@ public class CartPanel extends JPanel {
 	       loadingDialog.setVisible(true);
 
 	       JOptionPane.showMessageDialog(this, "결제가 완료되었습니다!");
+	       Gmailsender.SendGmail(emailField.getText(), nameField.getText());
 	       mainFrame.showMainCard("HISTORY");
  	   	}
  	   	else { 
