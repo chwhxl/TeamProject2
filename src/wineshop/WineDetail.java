@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.text.DecimalFormat;
 import manage.CartManage;
 import manage.CartProduct;
+import mallmain.Main;
 
 public class WineDetail extends JFrame {
 
@@ -61,18 +62,25 @@ public class WineDetail extends JFrame {
 
         // 와이너리 정보
         JLabel wineryLabel = new JLabel(wine.getWinery());
-        wineryLabel.setFont(new Font("Noto Sans KR", Font.PLAIN, 16));
+        wineryLabel.setFont(Main.getCustomFont("NotoSansKR-Bold.ttf", 16));
         wineryLabel.setForeground(Color.GRAY);
         wineryLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         rightPanel.add(wineryLabel);
         rightPanel.add(Box.createVerticalStrut(8));
 
         // 와인 이름
-        String htmlTitle = "<html><body style='width: 300px'>" + wine.getName() + " " + wine.getYear() + "</body></html>";
-        JLabel nameLabel = new JLabel(htmlTitle);
-        nameLabel.setFont(new Font("Noto Sans KR", Font.BOLD, 26)); 
-        nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        rightPanel.add(nameLabel);
+        String Title = wine.getName() + " " + wine.getYear();
+        JTextArea nameArea = new JTextArea(Title);
+        nameArea.setFont(Main.getCustomFont("NotoSansKR-Black.ttf", 26)); 
+        nameArea.setLineWrap(true);
+        nameArea.setWrapStyleWord(true);
+        nameArea.setEditable(false);
+        nameArea.setOpaque(false);
+        nameArea.setFocusable(false);
+        nameArea.setHighlighter(null);
+        nameArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nameArea.setMargin(new Insets(0, -3, 0, 0));
+        rightPanel.add(nameArea);
         rightPanel.add(Box.createVerticalStrut(25));
 
         // 스펙 패널
@@ -108,7 +116,7 @@ public class WineDetail extends JFrame {
         
         DecimalFormat df = new DecimalFormat("#,###");
         JLabel priceLabel = new JLabel("₩ " + df.format(wine.getPrice()));
-        priceLabel.setFont(new Font("Noto Sans KR", Font.BOLD, 26));
+        priceLabel.setFont(Main.getCustomFont("NotoSansKR-Black.ttf", 26));
         pricePanel.add(priceLabel);
         
         cartBox.add(pricePanel);
@@ -120,13 +128,13 @@ public class WineDetail extends JFrame {
         // 수량 조절 버튼
         JButton btnMinus = createRoundButton("-");
         quantityLabel = new JLabel("1", SwingConstants.CENTER);
-        quantityLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        quantityLabel.setFont(Main.getCustomFont("NotoSansKR-Bold.ttf", 16));
         quantityLabel.setPreferredSize(new Dimension(30, 30));
         JButton btnPlus = createRoundButton("+");
         
         // 장바구니 버튼
-        JButton btnCart = new JButton(" Add to Cart ");
-        btnCart.setFont(new Font("SansSerif", Font.BOLD, 14));
+        JButton btnCart = new JButton(" 장바구니에 추가 ");
+        btnCart.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 14));
         btnCart.setBackground(new Color(30, 30, 30));
         btnCart.setForeground(Color.WHITE);
         btnCart.setFocusPainted(false);
@@ -169,7 +177,7 @@ public class WineDetail extends JFrame {
     // 수량 +/- 버튼 모양
     private JButton createRoundButton(String text) {
         JButton btn = new JButton(text);
-        btn.setFont(new Font("SansSerif", Font.BOLD, 16));
+        btn.setFont(Main.getCustomFont("NotoSansKR-Black.ttf", 16));
         btn.setBackground(Color.WHITE);
         btn.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         btn.setFocusPainted(false);
@@ -184,14 +192,14 @@ public class WineDetail extends JFrame {
         gbc.gridx = 0;
         gbc.weightx = 0.15;
         JLabel tLabel = new JLabel(title);
-        tLabel.setFont(new Font("Noto Sans KR", Font.BOLD, 14));
+        tLabel.setFont(Main.getCustomFont("NotoSansKR-ExtraBold.ttf", 14));
         tLabel.setForeground(new Color(100, 100, 100));
         panel.add(tLabel, gbc);
 
         gbc.gridx = 1;
         gbc.weightx = 0.85;
         JLabel vLabel = new JLabel(value);
-        vLabel.setFont(new Font("Noto Sans KR", Font.PLAIN, 14));
+        vLabel.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 14));
         panel.add(vLabel, gbc);
     }
 
