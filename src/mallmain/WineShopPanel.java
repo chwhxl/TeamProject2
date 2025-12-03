@@ -51,7 +51,7 @@ class WineShopPanel extends JPanel {
         homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
         homePanel.add(homeButton);
         
-        // 장바구니 버튼 + history -> 장바구니 이동 수정
+        // 장바구니, 히스토리 버튼
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         cartPanel.setBackground(Color.WHITE);
         
@@ -84,7 +84,7 @@ class WineShopPanel extends JPanel {
         cartPanel.add(cartButton);
        
         
-        // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
+        // 샵 로고 누르면 shopmain으로 이동
         shopLogo.setBorderPainted(false);  
         shopLogo.setContentAreaFilled(false); 
         shopLogo.setMargin(new Insets(0, 0, 0, 0));
@@ -101,13 +101,13 @@ class WineShopPanel extends JPanel {
         itSearch.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {  
-                if (itSearch.getText().equals("검색어를 입력하세요.")) {
+                if (itSearch.getText().equals("검색어를 입력하세요.")) { // FocusListener 인터페이스
                     itSearch.setText("");
                 }
             }
 
             @Override
-            public void focusLost(FocusEvent e) {  
+            public void focusLost(FocusEvent e) {   // FocusListener 인터페이스
                 if (itSearch.getText().isBlank()) {
                     itSearch.setText("검색어를 입력하세요.");
                 }
@@ -178,7 +178,7 @@ class WineShopPanel extends JPanel {
         bigTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, lineColor));
         add(bigTopPanel, BorderLayout.NORTH);
 
-        // 카테고리 하위 버튼 - 생산지
+        // 카테고리 분류
         JPopupMenu typeMenu = new JPopupMenu();
         String[] types = {"RED", "WHITE", "SPARKLING"};
 
@@ -223,7 +223,7 @@ class WineShopPanel extends JPanel {
         resultPanel.repaint();
     }
     
-    // 전체 상품 showing
+    // 전체 상품 보여주기
     private void showAllWine() {
         resultPanel.removeAll();
 

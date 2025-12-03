@@ -26,7 +26,7 @@ class LiquorShopPanel extends JPanel {
     private JScrollPane scrollPane;
 	
     public LiquorShopPanel(Main mainFrame) {
-    	// 와인 데이터 로드
+    	// 리큐르 데이터 로드
     	LiquorList.loadLiquorData();
     
         this.mainFrame = mainFrame;
@@ -51,7 +51,7 @@ class LiquorShopPanel extends JPanel {
         homeButton.addActionListener(e -> mainFrame.showMainCard("HOME"));
         homePanel.add(homeButton);
         
-        // 장바구니 버튼 + history -> 장바구니 이동 수정
+        // 장바구니, 히스토리 버튼
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         cartPanel.setBackground(Color.WHITE);
         
@@ -84,10 +84,10 @@ class LiquorShopPanel extends JPanel {
         cartPanel.add(cartButton);
        
         
-        // 샵 로고 누르면 홈 패널로 전환 shopmain으로 이동
-        shopLogo.setBorderPainted(false);   // 외곽선 제거 원하면 false로 변경
-        shopLogo.setContentAreaFilled(false); // 배경 채움 제거
-        shopLogo.setMargin(new Insets(0, 0, 0, 0)); // 여백 제거
+        // 샵 로고 누르면 shopmain으로 이동
+        shopLogo.setBorderPainted(false);   
+        shopLogo.setContentAreaFilled(false); 
+        shopLogo.setMargin(new Insets(0, 0, 0, 0)); 
 
 
         shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
@@ -145,18 +145,18 @@ class LiquorShopPanel extends JPanel {
         categoryPanel.add(totalButton);
         categoryPanel.add(topCate1);
 
-        // 버튼 위치 3행 1열
+        // 버튼 3 X 1 배열
         JPanel bigTopPanel = new JPanel();
         bigTopPanel.setLayout(new BoxLayout(bigTopPanel, BoxLayout.Y_AXIS));
 
-        // 1행: 로고(샵메인) 버튼
+        // 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
         btLocation1.setBackground(Color.WHITE);
         btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);
         
-        // 2행: 홈, 장바구니 버튼
+        // 홈, 장바구니 버튼
         JPanel btLocation2 = new JPanel(new BorderLayout());
         btLocation2.setBackground(Color.WHITE);
         
@@ -165,7 +165,7 @@ class LiquorShopPanel extends JPanel {
         
         bigTopPanel.add(btLocation2);
 
-        // 3행: 카테고리, 상품 버튼
+        // 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
         btLocation3.setBackground(Color.WHITE);
         btLocation3.add(categoryPanel, BorderLayout.WEST);
@@ -178,7 +178,7 @@ class LiquorShopPanel extends JPanel {
         bigTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, lineColor));
         add(bigTopPanel, BorderLayout.NORTH);
 
-        // 카테고리 하위 버튼 - 생산지
+        // 카테고리 분류
         JPopupMenu typeMenu = new JPopupMenu();
         String[] types = {"Whisky", "Tequila", "Vodka", "Rum"};
 
@@ -223,7 +223,7 @@ class LiquorShopPanel extends JPanel {
         resultPanel.repaint();
     }
     
-    // 전체 상품 showing
+    // 전체 상품 보여주기
     private void showAllLiquor() {
         resultPanel.removeAll();
 
