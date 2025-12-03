@@ -100,15 +100,15 @@ public class Main extends JFrame {
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, fontFile);
             
             // 크기 조절해서 반환
-            return customFont.deriveFont(size);
+            return customFont.deriveFont(Font.PLAIN, size);
             
         } catch (Exception e) {
             // 에러 나면 그냥 기본 폰트 반환해서 프로그램 안 꺼지게 함
             System.err.println("폰트 로드 실패: " + fileName);
-            return new Font("Noto Sans KR", Font.BOLD, (int)size);
+            return new Font("Noto Sans KR", Font.PLAIN, (int)size);
         }
     }
-
+    
     public static void resetScroll(JScrollPane scrollPane) {
         if (scrollPane == null) return; // 안전장치
 

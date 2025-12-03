@@ -18,10 +18,14 @@ public class LiquorSearchResult extends JPanel{
     public LiquorSearchResult(Liquor liquor) {
         this.liquor = liquor;
 
+        Color lineColor = new Color(220, 220, 220);
+        Color boxColor = new Color(248, 248, 248);
+        
         // 카드 디자인
         setPreferredSize(new Dimension(180, 296));
-        setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        setBorder(BorderFactory.createLineBorder(lineColor, 1));
         setLayout(new BorderLayout());
+        setBackground(boxColor);
 
         // 상품 이미지 
         JLabel imgLabel;
@@ -42,11 +46,15 @@ public class LiquorSearchResult extends JPanel{
         	imgLabel = new JLabel("이미지 없음", JLabel.CENTER);
         }
         
+        imgLabel.setOpaque(true);
+        imgLabel.setBackground(Color.WHITE);
         imgLabel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         imgLabel.setPreferredSize(new Dimension(100, 180));
         add(imgLabel, BorderLayout.NORTH);
         
         JPanel infoPanel = new JPanel(new BorderLayout(0, 5));
+        infoPanel.setBackground(boxColor);
+        
 	    JTextPane namePane = new JTextPane();
 	
 	    namePane.setText(liquor.getName());
@@ -58,14 +66,19 @@ public class LiquorSearchResult extends JPanel{
 	    namePane.setEditable(false);
 	    namePane.setOpaque(false); // 배경 투명하게
 	    namePane.setBorder(null); // 테두리 없애기
-	    namePane.setFont(new Font("Noto Sans KR", Font.BOLD, 14)); // 폰트 설정
+	    namePane.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 15)); // 폰트 설정
 	    JPanel bottomInfo = new JPanel(new GridLayout(2, 1));
 	    bottomInfo.setOpaque(false);
 	
 	    DecimalFormat df = new DecimalFormat("#,###");
 	    JLabel price = new JLabel(df.format(liquor.getPrice()) + "원 (재고: " + liquor.getStock()+"개)" , JLabel.CENTER);
+	    price.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 12));
+	    price.setForeground(new Color(90, 90, 90));
+	    
 	    JLabel alc = new JLabel(liquor.getAlcohol() + "%", JLabel.CENTER);
-		
+		alc.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 12));
+	    alc.setForeground(new Color(90, 90, 90));
+	    
 	    bottomInfo.add(price);
         bottomInfo.add(alc);
 
@@ -74,7 +87,9 @@ public class LiquorSearchResult extends JPanel{
 	    add(infoPanel, BorderLayout.CENTER);
         
         JButton cartBtn = new JButton("장바구니에 추가");
-        cartBtn.setFont(new Font("Noto Sans KR", Font.BOLD, 15));        
+        cartBtn.setBackground(new Color(30, 30, 30));
+        cartBtn.setFont(Main.getCustomFont("NotoSansKR-SemiBold.ttf", 13));     
+        cartBtn.setForeground(Color.WHITE);
         cartBtn.setFocusPainted(false);
         cartBtn.setPreferredSize(new Dimension(180, 30));// 높이 고정
         cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
