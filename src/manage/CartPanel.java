@@ -1,7 +1,6 @@
 package manage;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -9,7 +8,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import mallmain.Main;
-import wineshop.Wine;
 
 public class CartPanel extends JPanel {
 
