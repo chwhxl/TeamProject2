@@ -31,9 +31,11 @@ class LiquorShopPanel extends JPanel {
     
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
         
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        homePanel.setBackground(Color.WHITE);
 
         homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
@@ -51,6 +53,7 @@ class LiquorShopPanel extends JPanel {
         
         // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        cartPanel.setBackground(Color.WHITE);
         
         cartButton = new JButton(" 장바구니 ");
 		Main.MyFont(cartButton);
@@ -93,6 +96,7 @@ class LiquorShopPanel extends JPanel {
         shopLogo.addActionListener(e -> mainFrame.showMainCard("LIQUOR"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        searchPanel.setBackground(Color.WHITE);
 
         itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
@@ -120,6 +124,7 @@ class LiquorShopPanel extends JPanel {
 
         // 카테고리+전체 상품
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        categoryPanel.setBackground(Color.WHITE);
 
         totalButton = new JButton("모든 상품");
         Main.MyFont(totalButton);
@@ -146,12 +151,14 @@ class LiquorShopPanel extends JPanel {
 
         // 1행: 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
+        btLocation1.setBackground(Color.WHITE);
         btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);
         
         // 2행: 홈, 장바구니 버튼
         JPanel btLocation2 = new JPanel(new BorderLayout());
+        btLocation2.setBackground(Color.WHITE);
         
         btLocation2.add(homePanel, BorderLayout.WEST);
         btLocation2.add(cartPanel, BorderLayout.EAST);
@@ -160,13 +167,15 @@ class LiquorShopPanel extends JPanel {
 
         // 3행: 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
-        
+        btLocation3.setBackground(Color.WHITE);
         btLocation3.add(categoryPanel, BorderLayout.WEST);
         searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         btLocation3.add(searchPanel, BorderLayout.EAST);
 
         bigTopPanel.add(btLocation3);
 
+        Color lineColor = new Color(220, 220, 220);
+        bigTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, lineColor));
         add(bigTopPanel, BorderLayout.NORTH);
 
         // 카테고리 하위 버튼 - 생산지
@@ -201,7 +210,12 @@ class LiquorShopPanel extends JPanel {
 
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
+        resultPanel.setBackground(Color.WHITE);
+        
         this.scrollPane = new JScrollPane(resultPanel);
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBorder(null);
+        
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
         showAllLiquor();
@@ -291,14 +305,6 @@ class LiquorShopPanel extends JPanel {
 		showAllLiquor();
 	}
     
-    // 상세 페이지 -> 구현 필요
-    private void moveToDetail(Liquor Liquor) {  // 임시 상세 페이지 이동
-        mainPanel.removeAll();
-        // mainPanel.add(new DetailPanel(Liquor));
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }
-
     // 인터페이스
     private interface LiquorFilter {
         boolean match(Liquor Liquor);

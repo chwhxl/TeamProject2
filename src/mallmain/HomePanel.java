@@ -11,7 +11,8 @@ public class HomePanel extends JPanel{
 	public HomePanel(Main mainFrame) {
         // HomePanel 레이아웃 및 배경색 설정
 		setLayout(new BorderLayout()); 
-      
+		setBackground(Color.WHITE);
+		
         ImageIcon titleIcon = new ImageIcon("data/mallmain_icon/mainpage/hr.png");
         backgroundImage = titleIcon.getImage();
                      

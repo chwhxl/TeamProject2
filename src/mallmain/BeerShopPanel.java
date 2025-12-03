@@ -31,9 +31,11 @@ class BeerShopPanel extends JPanel {
     
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
         
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        homePanel.setBackground(Color.WHITE);
 
         homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
@@ -51,6 +53,7 @@ class BeerShopPanel extends JPanel {
         
         // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        cartPanel.setBackground(Color.WHITE);
         
         cartButton = new JButton(" 장바구니 ");
 		Main.MyFont(cartButton);
@@ -93,6 +96,7 @@ class BeerShopPanel extends JPanel {
         shopLogo.addActionListener(e -> mainFrame.showMainCard("BEER"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        searchPanel.setBackground(Color.WHITE);
 
         itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
@@ -121,6 +125,7 @@ class BeerShopPanel extends JPanel {
 
         // 카테고리+전체 상품
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        categoryPanel.setBackground(Color.WHITE);
 
         totalButton = new JButton("모든 상품");
         Main.MyFont(totalButton);
@@ -147,12 +152,14 @@ class BeerShopPanel extends JPanel {
 
         // 1행: 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
+        btLocation1.setBackground(Color.WHITE);
         btLocation1.add(shopLogo);
         
         bigTopPanel.add(btLocation1);
         
         // 2행: 홈, 장바구니 버튼
         JPanel btLocation2 = new JPanel(new BorderLayout());
+        btLocation2.setBackground(Color.WHITE);
         
         btLocation2.add(homePanel, BorderLayout.WEST);
         btLocation2.add(cartPanel, BorderLayout.EAST);
@@ -161,6 +168,7 @@ class BeerShopPanel extends JPanel {
 
         // 3행: 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
+        btLocation3.setBackground(Color.WHITE);
         
         btLocation3.add(categoryPanel, BorderLayout.WEST);
         searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -168,6 +176,8 @@ class BeerShopPanel extends JPanel {
 
         bigTopPanel.add(btLocation3);
 
+        Color lineColor = new Color(220, 220, 220);
+        bigTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, lineColor));
         add(bigTopPanel, BorderLayout.NORTH);
 
         // 카테고리 하위 버튼 - 생산지
@@ -202,7 +212,12 @@ class BeerShopPanel extends JPanel {
 
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
+        resultPanel.setBackground(Color.WHITE);
+        
         this.scrollPane = new JScrollPane(resultPanel);
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBorder(null);
+        
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
         showAllBeer();

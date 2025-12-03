@@ -31,9 +31,11 @@ class WineShopPanel extends JPanel {
     
         this.mainFrame = mainFrame;
         setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
         
         // 홈 버튼
         JPanel homePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        homePanel.setBackground(Color.WHITE);
 
         homeButton = new JButton("  홈  ");
         Main.MyFont(homeButton);
@@ -51,6 +53,7 @@ class WineShopPanel extends JPanel {
         
         // 장바구니 버튼 + history -> 장바구니 이동 수정
         JPanel cartPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        cartPanel.setBackground(Color.WHITE);
         
         cartButton = new JButton(" 장바구니 ");
 		Main.MyFont(cartButton);
@@ -86,13 +89,13 @@ class WineShopPanel extends JPanel {
         shopLogo.setContentAreaFilled(false); 
         shopLogo.setMargin(new Insets(0, 0, 0, 0));
 
-
         shopLogo.setFont(Main.getCustomFont("나눔손글씨 중학생.ttf", 40));
         shopLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));  // 버튼 위로 가면 커서 모양 변경
         
         shopLogo.addActionListener(e -> mainFrame.showMainCard("WINE"));
         // 검색
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        searchPanel.setBackground(Color.WHITE);
 
         itSearch = new JTextField("검색어를 입력하세요.", 20);  // 검색창에 떠있을 멘트
         itSearch.addFocusListener(new FocusAdapter() {
@@ -121,6 +124,7 @@ class WineShopPanel extends JPanel {
 
         // 카테고리+전체 상품
         JPanel categoryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        categoryPanel.setBackground(Color.WHITE);
 
         totalButton = new JButton("모든 상품");
         Main.MyFont(totalButton);
@@ -144,16 +148,18 @@ class WineShopPanel extends JPanel {
         // 버튼 3 X 1 배열
         JPanel bigTopPanel = new JPanel();
         bigTopPanel.setLayout(new BoxLayout(bigTopPanel, BoxLayout.Y_AXIS));
+        bigTopPanel.setBackground(Color.WHITE);
 
         // 로고(샵메인) 버튼
         JPanel btLocation1 = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
+        btLocation1.setBackground(Color.WHITE);
         btLocation1.add(shopLogo);
-        
+       
         bigTopPanel.add(btLocation1);
         
         // 홈, 장바구니 버튼
         JPanel btLocation2 = new JPanel(new BorderLayout());
-        
+        btLocation2.setBackground(Color.WHITE);
         btLocation2.add(homePanel, BorderLayout.WEST);
         btLocation2.add(cartPanel, BorderLayout.EAST);
         
@@ -161,13 +167,15 @@ class WineShopPanel extends JPanel {
 
         // 카테고리, 상품 버튼
         JPanel btLocation3 = new JPanel(new BorderLayout());
-        
+        btLocation3.setBackground(Color.WHITE);
         btLocation3.add(categoryPanel, BorderLayout.WEST);
         searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         btLocation3.add(searchPanel, BorderLayout.EAST);
 
         bigTopPanel.add(btLocation3);
-
+        
+        Color lineColor = new Color(220, 220, 220);
+        bigTopPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, lineColor));
         add(bigTopPanel, BorderLayout.NORTH);
 
         // 카테고리 하위 버튼 - 생산지
@@ -202,7 +210,12 @@ class WineShopPanel extends JPanel {
 
         // 결과
         resultPanel = new JPanel(new GridBagLayout());
+        resultPanel.setBackground(Color.WHITE);
+        
         this.scrollPane = new JScrollPane(resultPanel);
+        scrollPane.getViewport().setBackground(Color.WHITE);
+        scrollPane.setBorder(null);
+        
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         add(scrollPane, BorderLayout.CENTER);
         showAllWine();
@@ -291,15 +304,6 @@ class WineShopPanel extends JPanel {
     public void refreshShop() {
 		showAllWine();
 	}
-
-    // 상세 페이지 
-    private void moveToDetail(Wine Wine) {  
-        mainPanel.removeAll();
-        // mainPanel.add(new DetailPanel(Wine));
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }
-
     // 인터페이스
     private interface WineFilter {
         boolean match(Wine Wine);
