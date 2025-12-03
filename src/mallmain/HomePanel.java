@@ -23,6 +23,7 @@ public class HomePanel extends JPanel{
        
         String[] shopNames = {"wine", "beer", "liquor"};
         
+        //버튼 클릭하는 범위를 줄여줌 
         for (String name : shopNames) {
         	JButton shopBtn = new JButton() {
         	    @Override
@@ -50,16 +51,16 @@ public class HomePanel extends JPanel{
                 ImageIcon realIcon = new ImageIcon(scaledImg);
                 
 
-                // 진짜 이미지와 크기는 똑같지만, 내용은 텅 빈 투명 이미지
+                // 평소에는 이미지 안보이게 투명처리
                 BufferedImage transparentImg = new BufferedImage(
                         realIcon.getIconWidth(), realIcon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
                 ImageIcon transparentIcon = new ImageIcon(transparentImg);
 
                 shopBtn.setIcon(transparentIcon);        // 평소: 투명 이미지 (안 보임)
-                shopBtn.setRolloverIcon(realIcon);       // 마우스 올림: 진짜 이미지 (보임)
-                shopBtn.setPressedIcon(realIcon);        // 클릭 중: 진짜 이미지 유지
+                shopBtn.setRolloverIcon(realIcon);       // 마우스 올림: 이미지 보임
+                shopBtn.setPressedIcon(realIcon);        // 클릭 중: 이미지 유지
                 
-                
+                // 프레임 크기를 받아와서 상대적 위치로 버튼 위치 설정
                 int frameWidth = mainFrame.getWidth();
                 int frameHeight = mainFrame.getHeight();
                 
