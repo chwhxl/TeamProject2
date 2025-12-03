@@ -78,6 +78,7 @@ public class BeerSearchResult extends JPanel{
         cartBtn.setFont(new Font("Noto Sans KR", Font.BOLD, 15));      
         cartBtn.setFocusPainted(false);
         cartBtn.setPreferredSize(new Dimension(180, 30));// 높이 고정
+        cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {

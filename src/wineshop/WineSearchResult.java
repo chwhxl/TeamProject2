@@ -46,6 +46,7 @@ public class WineSearchResult extends JPanel{
         imgLabel.setPreferredSize(new Dimension(100, 180));
         add(imgLabel, BorderLayout.NORTH);
         
+        imgLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         imgLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -85,6 +86,7 @@ public class WineSearchResult extends JPanel{
         cartBtn.setFont(new Font("Noto Sans KR", Font.BOLD, 15));      
         cartBtn.setFocusPainted(false);
         cartBtn.setPreferredSize(new Dimension(180, 30));// 높이 고정
+        cartBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cartBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
