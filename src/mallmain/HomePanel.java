@@ -83,7 +83,7 @@ public class HomePanel extends JPanel{
                     shopBtn.setBounds(x,y, width, height);                }
                 
             } else {
-                System.err.println("Couldn't find image: " + imgPath);
+                System.out.println("이미지를 찾을 수 없습니다 " + imgPath);
             }
 
             // 스타일 제거
