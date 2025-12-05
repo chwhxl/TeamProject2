@@ -10,7 +10,7 @@ public class Gmailsender {
 		static void SendGmail(String customer_email, String customer_name) {
         String host = "smtp.gmail.com";
         final String user = "ganadi.haerong@gmail.com";
-        final String password = "="; // 공백 없이 입력
+        final String password = "************"; // 공백 없이 입력
 
         String to = customer_email; // 받는 사람 이메일
 
